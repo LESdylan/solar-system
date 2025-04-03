@@ -1,5 +1,41 @@
 @use "../abstracts/_all" as abstracts
+@use "sass:math"
 
 .sun
     $background: "../images/sun.svg"
     @include abstracts.circle(abstracts.$sun-size, $background)
+    box-shadow: 0 0 60px rgba(255, 180, 0, 0.4), 0 0 120px rgba(255, 100, 0, 0.2)
+    z-index: 2
+    color: white
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: calc(abstracts.$sun-size / 12)
+    text-shadow: 0 0 5px #000
+    position: relative
+    transform-style: preserve-3d
+    
+    &::after
+        content: ""
+        position: absolute
+        top: -20px
+        left: -20px
+        width: calc(100% + 40px)
+        height: calc(100% + 40px)
+        border-radius: 100%
+        background: radial-gradient(circle, rgba(255,165,0,0.3) 0%, rgba(255,140,0,0) 70%)
+        z-index: -1
+        animation: animation-self-rotate 100s linear infinite
+        --base-rotation-duration: 100s
+
+    .planet-surface
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        border-radius: 100%
+        background-size: 150% 150%
+        background-image: url("../images/sun-texture.jpg")
+        animation: animation-self-rotate 25s linear infinite
+        --base-rotation-duration: 25s

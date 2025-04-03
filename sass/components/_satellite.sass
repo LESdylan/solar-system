@@ -1,7 +1,8 @@
 @use "../abstracts/_all" as abstracts
+@use "sass:math"
 
 .satellite
-    background-color: red
+    background-color: #aaa
     width: abstracts.$satellite-size
     height: abstracts.$satellite-size
     border-radius: 100%
@@ -10,18 +11,27 @@
     left: 50%
     translate: -50% -50%
     color: white
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.4)
+    z-index: 3
 
     &--moon
         @extend .satellite
-        background-color: grey
+        background-color: #d0d0d0
+        background-image: radial-gradient(circle at 30% 30%, #fff 0%, #d0d0d0 70%)
         @include abstracts.rotate-around-planet($planet-size: abstracts.$earth-size)
 
     &--phobos
         @extend .satellite
-        background-color: white
+        background-color: #c8c8c8
+        background-image: radial-gradient(circle at 30% 30%, #d8d8d8 0%, #a8a8a8 70%)
+        width: calc(abstracts.$satellite-size / 1.5)
+        height: calc(abstracts.$satellite-size / 1.5)
         @include abstracts.rotate-around-planet($planet-size: abstracts.$mars-size)
 
     &--deimos
         @extend .satellite
-        background-color: orange
+        background-color: #e8d8c0
+        background-image: radial-gradient(circle at 30% 30%, #f8e8d0 0%, #c8b8a0 70%)
+        width: calc(abstracts.$satellite-size / 2)
+        height: calc(abstracts.$satellite-size / 2)
         @include abstracts.rotate-around-planet($planet-size: abstracts.$mars-size, $duration: 2s)

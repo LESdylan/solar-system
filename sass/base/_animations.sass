@@ -3,3 +3,133 @@
         transform: rotate(0)
     100%
         transform: rotate(360deg)
+
+@keyframes animation-self-rotate
+    0%
+        transform: rotate(0)
+    100%
+        transform: rotate(360deg)
+
+@keyframes animation-orbit
+    0%
+        transform: rotate(0)
+    100%
+        transform: rotate(360deg)
+
+@keyframes twinkle
+    0%, 100%
+        opacity: 0.2
+        transform: scale(0.8)
+    50%
+        opacity: 1
+        transform: scale(1.2)
+
+@keyframes comet-orbit
+    0%
+        top: 80%
+        left: -5%
+        transform: rotate(20deg) scale(0.5)
+    15%
+        top: 50%
+        left: 20%
+        transform: rotate(30deg) scale(0.8)
+    35%
+        top: 20%
+        left: 40%
+        transform: rotate(45deg) scale(1.5)
+    50%
+        top: 30%
+        left: 60%
+        transform: rotate(60deg) scale(1.2)
+    65%
+        top: 50%
+        left: 80%
+        transform: rotate(75deg) scale(0.9)
+    80%
+        top: 70%
+        left: 70%
+        transform: rotate(60deg) scale(0.7)
+    100%
+        top: 80%
+        left: -5%
+        transform: rotate(20deg) scale(0.5)
+
+@keyframes comet-glow
+    0%, 100%
+        opacity: 0.6
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 0 40px rgba(100, 200, 255, 0.3)
+    50%
+        opacity: 1
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 60px rgba(100, 200, 255, 0.5)
+
+@keyframes comet-particle
+    0%
+        transform: translate(0, 0) scale(1)
+        opacity: 1
+    100%
+        transform: translate(var(--x, -20px), var(--y, -20px)) scale(0)
+        opacity: 0
+
+@keyframes asteroid-orbit
+    0%
+        transform: rotate(0) translateX(2px)
+    25% 
+        transform: rotate(90deg) translateX(2px) scale(0.9)
+    50%
+        transform: rotate(180deg) translateX(3px) scale(1.1)
+    75%
+        transform: rotate(270deg) translateX(1px) scale(0.8)
+    100%
+        transform: rotate(360deg) translateX(2px)
+
+@keyframes asteroid-rotate
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg)
+
+@keyframes asteroid-wobble
+    0%, 100%
+        transform: rotate(0deg) translateX(0px)
+    25%
+        transform: rotate(5deg) translateX(1px)
+    50%
+        transform: rotate(0deg) translateX(0px)
+    75%
+        transform: rotate(-5deg) translateX(-1px)
+
+@keyframes pulse-glow
+    0%, 100%
+        filter: brightness(1)
+        box-shadow: 0 0 20px white
+    50%
+        filter: brightness(1.3)
+        box-shadow: 0 0 30px white, 0 0 50px rgba(255, 255, 255, 0.5)
+
+@keyframes float
+    0%, 100%
+        transform: translateY(0)
+    50%
+        transform: translateY(-10px)
+
+@keyframes hover-reveal
+    0%
+        opacity: 0
+        transform: translateY(10px)
+    100%
+        opacity: 1
+        transform: translateY(0)
+
+@keyframes shooting-star
+    0%
+        opacity: 0
+        top: -10%
+        left: -10%
+        transform: rotate(45deg) scale(0.5)
+    20%, 80%
+        opacity: 1
+    100%
+        opacity: 0
+        top: 110%
+        left: 110%
+        transform: rotate(45deg) scale(0.1)

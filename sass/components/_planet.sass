@@ -4,21 +4,224 @@
 
 $distance-between-mercury-and-sun: abstracts.$gap-between-planets
 $distance-between-venus-and-sun: 2 * abstracts.$gap-between-planets + abstracts.$mercury-size
+$distance-between-earth-and-sun: 3 * abstracts.$gap-between-planets + abstracts.$mercury-size + abstracts.$venus-size
+$distance-between-mars-and-sun: 4 * abstracts.$gap-between-planets + abstracts.$mercury-size + abstracts.$venus-size + abstracts.$earth-size
+$distance-between-jupiter-and-sun: 5 * abstracts.$gap-between-planets + abstracts.$mercury-size + abstracts.$venus-size + abstracts.$earth-size + abstracts.$mars-size
+$distance-between-saturn-and-sun: 6 * abstracts.$gap-between-planets + abstracts.$mercury-size + abstracts.$venus-size + abstracts.$earth-size + abstracts.$mars-size + abstracts.$jupiter-size
+$distance-between-uranus-and-sun: 7 * abstracts.$gap-between-planets + abstracts.$mercury-size + abstracts.$venus-size + abstracts.$earth-size + abstracts.$mars-size + abstracts.$jupiter-size + abstracts.$saturn-size
+$distance-between-neptune-and-sun: 8 * abstracts.$gap-between-planets + abstracts.$mercury-size + abstracts.$venus-size + abstracts.$earth-size + abstracts.$mars-size + abstracts.$jupiter-size + abstracts.$saturn-size + abstracts.$uranus-size
 
 $list-planets: 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune'
 $planets-size: ('mercury': #{abstracts.$mercury-size}, 'venus': #{abstracts.$venus-size}, 'earth': #{abstracts.$earth-size}, 'mars': #{abstracts.$mars-size}, 'jupiter': #{abstracts.$jupiter-size}, "saturn": #{abstracts.$saturn-size}, "uranus": #{abstracts.$uranus-size}, "neptune": #{abstracts.$neptune-size})
-$planets-sun-distance: ('mercury': $distance-between-mercury-and-sun, 'venus': $distance-between-venus-and-sun)
+$planets-sun-distance: ('mercury': $distance-between-mercury-and-sun, 'venus': $distance-between-venus-and-sun, 'earth': $distance-between-earth-and-sun, 'mars': $distance-between-mars-and-sun, 'jupiter': $distance-between-jupiter-and-sun, 'saturn': $distance-between-saturn-and-sun, 'uranus': $distance-between-uranus-and-sun, 'neptune': $distance-between-neptune-and-sun)
+$planets-orbit-speed: ('mercury': 4s, 'venus': 6s, 'earth': 10s, 'mars': 15s, 'jupiter': 25s, 'saturn': 30s, 'uranus': 35s, 'neptune': 40s)
+$planets-self-rotation: ('mercury': 10s, 'venus': 9s, 'earth': 4s, 'mars': 5s, 'jupiter': 2s, 'saturn': 3s, 'uranus': 4s, 'neptune': 5s)
+$planets-glow: ('mercury': rgba(200, 200, 200, 0.3), 'venus': rgba(255, 220, 180, 0.4), 'earth': rgba(100, 180, 255, 0.4), 'mars': rgba(255, 150, 80, 0.4), 'jupiter': rgba(255, 200, 150, 0.4), 'saturn': rgba(245, 230, 190, 0.3), 'uranus': rgba(180, 230, 245, 0.4), 'neptune': rgba(100, 140, 255, 0.4))
+
+.galaxy
+    &__orbit-paths
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        z-index: 0
+        
+        @each $planet in $list-planets
+            $distance-between-planet-and-sun: map.get($planets-sun-distance, $planet)
+            $size-planet: map.get($planets-size, $planet)
+            
+            .orbit-path--#{$planet}
+                position: absolute
+                top: 50%
+                left: 50%
+                width: calc(2 * $distance-between-planet-and-sun + $size-planet)
+                height: calc(2 * $distance-between-planet-and-sun + $size-planet)
+                border-radius: 50%
+                border: 1px solid rgba(255, 255, 255, 0.1)
+                transform: translate(-50%, -50%)
+
+.asteroid-belt
+    position: absolute
+    z-index: 0
+    top: 50%
+    left: 50%
+    width: calc(2 * ($distance-between-mars-and-sun + $distance-between-jupiter-and-sun) / 2 + 100px)
+    height: calc(2 * ($distance-between-mars-and-sun + $distance-between-jupiter-and-sun) / 2 + 100px)
+    border-radius: 50%
+    transform: translate(-50%, -50%)
+    pointer-events: none
+    
+    &__particle
+        position: absolute
+        width: 2px
+        height: 2px
+        background-color: rgba(200, 180, 160, 0.7)
+        border-radius: 50%
+        transform-origin: center
+        
+        @for $i from 1 through 300
+            &:nth-child(#{$i})
+                $angle: math.random(360)
+                $distance: math.random(30) + 35
+                $delay: math.random(5) + 5
+                $size: math.random(3) + 1
+                $rotation-duration: math.random(20) + 10
+                top: calc(50% + #{math.cos($angle * 1deg) * $distance * 1%})
+                left: calc(50% + #{math.sin($angle * 1deg) * $distance * 1%})
+                width: #{$size}px
+                height: #{$size}px
+                animation: asteroid-orbit #{math.random(60) + 60}s linear infinite, asteroid-rotate #{$rotation-duration}s linear infinite
+                animation-delay: -#{$delay}s
+                @if $i % 3 == 0
+                    clip-path: polygon(50% 0%, 80% 30%, 100% 50%, 80% 70%, 50% 100%, 20% 70%, 0% 50%, 20% 30%)
+
+.comet
+    position: absolute
+    width: 8px
+    height: 8px
+    background-color: #fff
+    border-radius: 50%
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(100, 200, 255, 0.4)
+    z-index: 3
+    
+    &::after
+        content: ""
+        position: absolute
+        top: 50%
+        left: 0
+        width: 60px
+        height: 4px
+        background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0))
+        transform: translateY(-50%)
+        border-radius: 2px
+        pointer-events: none
+    
+    &__particles
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        pointer-events: none
+        z-index: 2
 
 .planet
-
     @each $planet in $list-planets
         &--#{$planet}
             position: relative
             $background-planet: "../images/#{$planet}.svg"
             $size-planet: map.get($planets-size, $planet)
             $distance-between-planet-and-sun: map.get($planets-sun-distance, $planet)
+            $orbit-speed: map.get($planets-orbit-speed, $planet)
+            $rotation-speed: map.get($planets-self-rotation, $planet)
+            $glow-color: map.get($planets-glow, $planet)
+            
             @include abstracts.circle($size-planet, $background-planet)
+            @include abstracts.planet-glow($glow-color)
+            
             @if $distance-between-planet-and-sun
-                @include abstracts.rotate-around-sun($distance-between-planet-and-sun, $size-planet)
-            @if $planet == 'uranus' or $planet == 'saturn'
-                border-radius: 0
+                @include abstracts.rotate-around-sun($distance-between-planet-and-sun, $size-planet, $orbit-speed)
+                
+            @include abstracts.self-rotate($rotation-speed)
+            
+            @if $planet == 'saturn'
+                @include abstracts.planet-ring(rgba(210, 180, 140, 0.8), 20deg)
+                
+            @if $planet == 'uranus'
+                @include abstracts.planet-ring(rgba(180, 230, 245, 0.7), 85deg)
+                
+            color: white
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: calc($size-planet / 10)
+            text-shadow: 0 0 3px black
+            overflow: visible
+            perspective: 800px
+            transform-style: preserve-3d
+            
+            cursor: pointer
+            transition: transform 0.2s ease
+            
+            &:hover
+                transform: scale(1.05)
+                .planet-hover-effect
+                    opacity: 1
+                
+            .planet-hover-effect
+                position: absolute
+                top: -15px
+                left: 50%
+                transform: translateX(-50%)
+                background: rgba(0, 0, 0, 0.7)
+                color: white
+                padding: 5px 10px
+                border-radius: 20px
+                font-size: 12px
+                opacity: 0
+                transition: opacity 0.2s
+                pointer-events: none
+                white-space: nowrap
+                animation: hover-reveal 0.3s forwards
+                
+                &::after
+                    content: ""
+                    position: absolute
+                    top: 100%
+                    left: 50%
+                    transform: translateX(-50%)
+                    border-width: 5px
+                    border-style: solid
+                    border-color: rgba(0, 0, 0, 0.7) transparent transparent transparent
+            
+            .planet-surface
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                height: 100%
+                border-radius: 100%
+                background-size: 150% 150%
+                animation: animation-self-rotate #{map.get($planets-self-rotation, $planet)} linear infinite
+                --base-rotation-duration: #{map.get($planets-self-rotation, $planet)}
+    
+    &--mercury
+        .planet-surface
+            background-image: url("../images/mercury-texture.jpg")
+            background-size: 150% 150%
+        
+    &--venus
+        .planet-surface
+            background-image: url("../images/venus-texture.jpg") 
+            background-size: 150% 150%
+        
+    &--earth
+        .planet-surface
+            background-image: url("../images/earth-texture.jpg")
+            background-size: 150% 150%
+        
+    &--mars
+        .planet-surface
+            background-image: url("../images/mars-texture.jpg")
+            background-size: 150% 150%
+        
+    &--jupiter
+        .planet-surface
+            background-image: url("../images/jupiter-texture.jpg")
+            background-size: 150% 150%
+        
+    &--saturn
+        .planet-surface
+            background-image: url("../images/saturn-texture.jpg")
+            background-size: 150% 150%
+        
+    &--uranus
+        .planet-surface
+            background-image: url("../images/uranus-texture.jpg")
+            background-size: 150% 150%
+        
+    &--neptune
+        .planet-surface
+            background-image: url("../images/neptune-texture.jpg")
+            background-size: 150% 150%

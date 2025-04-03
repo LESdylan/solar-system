@@ -3,27 +3,155 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SASS - Coder notre système solaire</title>
+    <title>Système Solaire Interactif</title>
     <link rel="stylesheet" href="assets/css/main.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <!-- Add AR.js for augmented reality support -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    
+    <!-- Add GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
   </head>
   <body class="galaxy">
+    <!-- Accessibility controls -->
+    <div class="accessibility-controls">
+      <button class="accessibility-controls__toggle" aria-label="Accessibility Options">
+        <i class="fas fa-universal-access"></i>
+      </button>
+      <div class="accessibility-controls__panel">
+        <h3>Accessibility Options</h3>
+        <div class="accessibility-controls__option">
+          <label for="reduce-motion">Reduce Motion</label>
+          <input type="checkbox" id="reduce-motion">
+        </div>
+        <div class="accessibility-controls__option">
+          <label for="high-contrast">High Contrast</label>
+          <input type="checkbox" id="high-contrast">
+        </div>
+        <div class="accessibility-controls__option">
+          <label for="larger-text">Larger Text</label>
+          <input type="checkbox" id="larger-text">
+        </div>
+        <div class="accessibility-controls__option">
+          <label for="screen-reader">Screen Reader Support</label>
+          <input type="checkbox" id="screen-reader">
+        </div>
+      </div>
+    </div>
+
+    <!-- Astronaut Guide -->
+    <div class="astronaut-guide">
+      <div class="astronaut-guide__astronaut">
+        <img src="assets/images/astronaut.svg" alt="Astronaute guide">
+      </div>
+      <div class="astronaut-guide__speech-bubble">
+        <p>Bienvenue dans notre système solaire interactif ! Je suis votre guide astronaute.</p>
+        <button class="astronaut-guide__button">Commencer la visite</button>
+      </div>
+    </div>
+
+    <!-- Overlay for focus highlighting -->
+    <div class="focus-overlay"></div>
+    
     <div class="galaxy__planets-container">
-      <div class="sun">Soleil</div>
-      <div class="planet planet--mercury">Mercure</div>
-      <div class="planet planet--venus">Venus</div>
-      <div class="planet planet--earth">
+      <div class="sun" data-sound="sun.mp3" data-planet="sun">
+        Soleil
+        <div class="planet-surface"></div>
+      </div>
+      <div class="planet planet--mercury" data-sound="mercury.mp3" data-planet="mercury">
+        Mercure
+        <div class="planet-surface"></div>
+      </div>
+      <div class="planet planet--venus" data-sound="venus.mp3" data-planet="venus">
+        Venus
+        <div class="planet-surface"></div>
+      </div>
+      <div class="planet planet--earth" data-sound="earth.mp3" data-planet="earth">
+        Terre
+        <div class="planet-surface"></div>
         <div class="satellite--moon"></div>
       </div>
-      <div class="planet planet--mars">
+      <div class="planet planet--mars" data-sound="mars.mp3" data-planet="mars">
+        Mars
+        <div class="planet-surface"></div>
         <div class="satellite--phobos"></div>
         <div class="satellite--deimos"></div>
       </div>
-      <div class="planet planet--jupiter">Jupiter</div>
-      <div class="planet planet--saturn">Saturne</div>
-      <div class="planet planet--uranus">Uranus</div>
-      <div class="planet planet--neptune">Neptune</div>
+      <div class="planet planet--jupiter" data-sound="jupiter.mp3" data-planet="jupiter">
+        Jupiter
+        <div class="planet-surface"></div>
+      </div>
+      <div class="planet planet--saturn" data-sound="saturn.mp3" data-planet="saturn">
+        Saturne
+        <div class="planet-surface"></div>
+      </div>
+      <div class="planet planet--uranus" data-sound="uranus.mp3" data-planet="uranus">
+        Uranus
+        <div class="planet-surface"></div>
+      </div>
+      <div class="planet planet--neptune" data-sound="neptune.mp3" data-planet="neptune">
+        Neptune
+        <div class="planet-surface"></div>
+      </div>
     </div>
+    
+    <div class="galaxy__orbit-paths">
+      <div class="orbit-path--mercury"></div>
+      <div class="orbit-path--venus"></div>
+      <div class="orbit-path--earth"></div>
+      <div class="orbit-path--mars"></div>
+      <div class="orbit-path--jupiter"></div>
+      <div class="orbit-path--saturn"></div>
+      <div class="orbit-path--uranus"></div>
+      <div class="orbit-path--neptune"></div>
+    </div>
+    
+    <div class="asteroid-belt">
+      <!-- Generate asteroid particles with JavaScript -->
+      <script>
+        const asteroidBelt = document.querySelector('.asteroid-belt');
+        for (let i = 0; i < 300; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('asteroid-belt__particle');
+          asteroidBelt.appendChild(particle);
+        }
+      </script>
+    </div>
+    
+    <!-- Replace the static comet with an enhanced version -->
+    <div class="comet">
+      <div class="comet__particles"></div>
+    </div>
+
+    <!-- Add a second comet with different trajectory -->
+    <div class="comet comet--alt"></div>
+    
     <div class="galaxy__stars-container">
+      <!-- Existing stars -->
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
+      <img src="assets/images/star.svg" alt="" class="star">
       <img src="assets/images/star.svg" alt="" class="star">
       <img src="assets/images/star.svg" alt="" class="star">
       <img src="assets/images/star.svg" alt="" class="star">
@@ -43,5 +171,1786 @@
       <img src="assets/images/star.svg" alt="" class="star">
       <img src="assets/images/star.svg" alt="" class="star">
     </div>
+    
+    <!-- Add shooting stars -->
+    <div class="galaxy__shooting-star"></div>
+    <div class="galaxy__shooting-star"></div>
+    <div class="galaxy__shooting-star"></div>
+    
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <button class="control-panel__toggle"><i class="fas fa-cog"></i></button>
+      <div class="control-panel__header">
+        <h3>Contrôles du système solaire</h3>
+      </div>
+      
+      <div class="control-panel__section">
+        <h4>Thème</h4>
+        <div class="theme-switch">
+          <span class="theme-switch__label">Mode nuit</span>
+          <label class="theme-switch__toggle">
+            <input type="checkbox" id="theme-toggle">
+            <span class="theme-switch__slider"></span>
+          </label>
+        </div>
+      </div>
+      
+      <div class="control-panel__section">
+        <h4>Vitesse d'animation</h4>
+        <div class="control-panel__slider">
+          <label for="orbit-speed">Vitesse des orbites</label>
+          <input type="range" id="orbit-speed" min="0.1" max="2" step="0.1" value="1">
+          <span class="control-panel__info">1x</span>
+        </div>
+        
+        <div class="control-panel__slider">
+          <label for="rotation-speed">Vitesse de rotation</label>
+          <input type="range" id="rotation-speed" min="0.1" max="2" step="0.1" value="1">
+          <span class="control-panel__info">1x</span>
+        </div>
+      </div>
+      
+      <div class="control-panel__section">
+        <h4>Affichage</h4>
+        <button class="control-panel__button" id="toggle-orbits">Afficher les orbites</button>
+        <button class="control-panel__button" id="toggle-labels">Afficher les noms</button>
+        <button class="control-panel__button" id="toggle-sound">Son activé</button>
+      </div>
+      
+      <div class="control-panel__section">
+        <h4>Informations</h4>
+        <p>Cliquez sur une planète pour en savoir plus sur elle. Utilisez le panneau de contrôle pour personnaliser l'expérience.</p>
+      </div>
+    </div>
+    
+    <!-- Space exploration timeline -->
+    <div class="timeline">
+      <button class="timeline__toggle" aria-label="Toggle Timeline">
+        <i class="fas fa-history"></i>
+      </button>
+      <div class="timeline__container">
+        <h3>Space Exploration Timeline</h3>
+        <div class="timeline__events">
+          <div class="timeline__event" data-year="1957">
+            <span class="timeline__year">1957</span>
+            <div class="timeline__content">
+              <h4>Sputnik 1</h4>
+              <p>First artificial satellite launched by the Soviet Union</p>
+            </div>
+          </div>
+          <div class="timeline__event" data-year="1969">
+            <span class="timeline__year">1969</span>
+            <div class="timeline__content">
+              <h4>Apollo 11</h4>
+              <p>First humans land on the Moon</p>
+            </div>
+          </div>
+          <div class="timeline__event" data-year="1990">
+            <span class="timeline__year">1990</span>
+            <div class="timeline__content">
+              <h4>Hubble Space Telescope</h4>
+              <p>Revolutionary space telescope launched</p>
+            </div>
+          </div>
+          <div class="timeline__event" data-year="2012">
+            <span class="timeline__year">2012</span>
+            <div class="timeline__content">
+              <h4>Curiosity Rover</h4>
+              <p>NASA's Mars rover lands on the red planet</p>
+            </div>
+          </div>
+          <div class="timeline__event" data-year="2021">
+            <span class="timeline__year">2021</span>
+            <div class="timeline__content">
+              <h4>James Webb Space Telescope</h4>
+              <p>Most powerful space telescope launched</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Universe explorer button -->
+    <div class="universe-explorer">
+      <button class="universe-explorer__toggle">
+        <i class="fas fa-rocket"></i> Explore Beyond
+      </button>
+    </div>
+
+    <!-- AR mode toggle for mobile -->
+    <div class="ar-toggle">
+      <button class="ar-toggle__button">
+        <i class="fas fa-vr-cardboard"></i> View in AR
+      </button>
+    </div>
+
+    <!-- Quiz button -->
+    <div class="space-quiz">
+      <button class="space-quiz__toggle">
+        <i class="fas fa-question-circle"></i> Space Quiz
+      </button>
+    </div>
+    
+    <!-- 3D Controls -->
+    <div class="view-controls">
+      <button class="view-controls__button" id="view-top">Top View</button>
+      <button class="view-controls__button" id="view-side">Side View</button>
+      <button class="view-controls__button view-controls__button--active" id="view-default">Default View</button>
+    </div>
+
+    <!-- Planet Info Modal -->
+    <div class="planet-info-overlay"></div>
+    <div class="planet-info">
+      <button class="planet-info__close"><i class="fas fa-times"></i></button>
+      <h2 class="planet-info__title"><span class="planet-icon"></span> <span id="planet-name">Planète</span></h2>
+      
+      <div class="planet-info__content">
+        <div class="planet-info__image">
+          <img id="planet-image" src="" alt="Planet">
+        </div>
+        
+        <div class="planet-info__stats">
+          <h3>Caractéristiques</h3>
+          <ul>
+            <li><strong>Diamètre:</strong> <span id="planet-diameter"></span></li>
+            <li><strong>Distance du soleil:</strong> <span id="planet-distance"></span></li>
+            <li><strong>Période de révolution:</strong> <span id="planet-revolution"></span></li>
+            <li><strong>Période de rotation:</strong> <span id="planet-rotation"></span></li>
+            <li><strong>Température moyenne:</strong> <span id="planet-temperature"></span></li>
+          </ul>
+        </div>
+        
+        <div class="planet-info__description">
+          <p id="planet-description"></p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Space Quiz Modal -->
+    <div class="quiz-overlay"></div>
+    <div class="quiz-modal">
+      <button class="quiz-modal__close"><i class="fas fa-times"></i></button>
+      <h2 class="quiz-modal__title">Test Your Space Knowledge</h2>
+      
+      <div class="quiz-modal__content">
+        <div class="quiz-question" data-question="1">
+          <h3>Question 1: Which planet has the Great Red Spot?</h3>
+          <div class="quiz-options">
+            <label><input type="radio" name="q1" value="mars"> Mars</label>
+            <label><input type="radio" name="q1" value="jupiter"> Jupiter</label>
+            <label><input type="radio" name="q1" value="venus"> Venus</label>
+            <label><input type="radio" name="q1" value="saturn"> Saturn</label>
+          </div>
+        </div>
+        
+        <div class="quiz-question" data-question="2">
+          <h3>Question 2: Which is the hottest planet in our solar system?</h3>
+          <div class="quiz-options">
+            <label><input type="radio" name="q2" value="mercury"> Mercury</label>
+            <label><input type="radio" name="q2" value="venus"> Venus</label>
+            <label><input type="radio" name="q2" value="earth"> Earth</label>
+            <label><input type="radio" name="q2" value="mars"> Mars</label>
+          </div>
+        </div>
+        
+        <div class="quiz-question" data-question="3">
+          <h3>Question 3: How many moons does Jupiter have?</h3>
+          <div class="quiz-options">
+            <label><input type="radio" name="q3" value="16"> 16</label>
+            <label><input type="radio" name="q3" value="53"> 53</label>
+            <label><input type="radio" name="q3" value="79"> 79</label>
+            <label><input type="radio" name="q3" value="92"> 92</label>
+          </div>
+        </div>
+        
+        <button class="quiz-modal__submit">Submit Answers</button>
+        
+        <div class="quiz-results">
+          <h3>Your Score: <span id="quiz-score">0</span>/3</h3>
+          <p id="quiz-feedback"></p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Universe Explorer Modal -->
+    <div class="universe-overlay"></div>
+    <div class="universe-modal">
+      <button class="universe-modal__close"><i class="fas fa-times"></i></button>
+      <h2 class="universe-modal__title">Beyond Our Solar System</h2>
+      
+      <div class="universe-modal__content">
+        <div class="universe-navigation">
+          <button data-target="nearby-stars" class="universe-nav-btn">Nearby Stars</button>
+          <button data-target="galaxies" class="universe-nav-btn">Galaxies</button>
+          <button data-target="black-holes" class="universe-nav-btn universe-nav-btn--active">Black Holes</button>
+          <button data-target="exoplanets" class="universe-nav-btn">Exoplanets</button>
+        </div>
+        
+        <div class="universe-section" id="nearby-stars">
+          <h3>Nearby Stars</h3>
+          <div class="universe-grid">
+            <div class="universe-card" data-object="proxima-centauri">
+              <img src="assets/images/universe/proxima-centauri.jpg" alt="Proxima Centauri">
+              <h4>Proxima Centauri</h4>
+              <p>Closest star to our Solar System</p>
+            </div>
+            <!-- More nearby stars -->
+          </div>
+        </div>
+        
+        <div class="universe-section" id="galaxies" style="display:none;">
+          <h3>Galaxies</h3>
+          <div class="universe-grid">
+            <div class="universe-card" data-object="andromeda">
+              <img src="assets/images/universe/andromeda.jpg" alt="Andromeda Galaxy">
+              <h4>Andromeda Galaxy</h4>
+              <p>Closest spiral galaxy to the Milky Way</p>
+            </div>
+            <!-- More galaxies -->
+          </div>
+        </div>
+        
+        <div class="universe-section" id="black-holes">
+          <h3>Black Holes: The Universe's Most Extreme Objects</h3>
+          
+          <div class="blackhole-interactive">
+            <div class="blackhole-interactive__visualization">
+              <div class="blackhole-visualization">
+                <div class="blackhole-visualization__event-horizon"></div>
+                <div class="blackhole-visualization__accretion-disk"></div>
+                <div class="blackhole-visualization__light-bending"></div>
+              </div>
+            </div>
+            <div class="blackhole-interactive__info">
+              <p>Black holes are regions of spacetime where gravity is so strong that nothing—no particles or even electromagnetic radiation such as light—can escape from it.</p>
+              <p>The boundary of the region from which no escape is possible is called the event horizon.</p>
+              <p>Black holes form when very massive stars collapse at the end of their life cycle.</p>
+            </div>
+          </div>
+          
+          <h4 class="universe-subtitle">Types of Black Holes</h4>
+          
+          <div class="universe-grid">
+            <div class="universe-card blackhole-card" data-object="stellar">
+              <div class="blackhole-icon blackhole-icon--stellar"></div>
+              <h4>Stellar Black Hole</h4>
+              <p>Mass: 5-100 solar masses</p>
+              <p>Formed from the collapse of massive stars.</p>
+            </div>
+            
+            <div class="universe-card blackhole-card" data-object="intermediate">
+              <div class="blackhole-icon blackhole-icon--intermediate"></div>
+              <h4>Intermediate Black Hole</h4>
+              <p>Mass: 100-100,000 solar masses</p>
+              <p>Possibly formed from mergers or direct collapse of gas.</p>
+            </div>
+            
+            <div class="universe-card blackhole-card" data-object="supermassive">
+              <div class="blackhole-icon blackhole-icon--supermassive"></div>
+              <h4>Supermassive Black Hole</h4>
+              <p>Mass: Millions to billions of solar masses</p>
+              <p>Found at the center of most galaxies, including our Milky Way (Sagittarius A*).</p>
+            </div>
+            
+            <div class="universe-card blackhole-card" data-object="primordial">
+              <div class="blackhole-icon blackhole-icon--primordial"></div>
+              <h4>Primordial Black Hole</h4>
+              <p>Mass: Extremely variable</p>
+              <p>Hypothetical black holes formed shortly after the Big Bang.</p>
+            </div>
+          </div>
+          
+          <h4 class="universe-subtitle">Famous Black Holes</h4>
+          
+          <div class="universe-grid">
+            <div class="universe-card" data-object="sagittarius-a">
+              <img src="assets/images/universe/sagittarius-a.jpg" alt="Sagittarius A*">
+              <h4>Sagittarius A*</h4>
+              <p>The supermassive black hole at the center of our Milky Way galaxy, about 26,000 light-years from Earth.</p>
+              <p><strong>Mass:</strong> About 4 million times that of our Sun</p>
+            </div>
+            
+            <div class="universe-card" data-object="m87">
+              <img src="assets/images/universe/m87.jpg" alt="M87 Black Hole">
+              <h4>M87 Black Hole</h4>
+              <p>The first black hole ever to be imaged directly, located in the center of galaxy M87.</p>
+              <p><strong>Mass:</strong> About 6.5 billion times that of our Sun</p>
+            </div>
+            
+            <div class="universe-card" data-object="cygnus-x1">
+              <img src="assets/images/universe/cygnus-x1.jpg" alt="Cygnus X-1">
+              <h4>Cygnus X-1</h4>
+              <p>One of the first discovered black holes, it's a stellar-mass black hole in a binary system with a blue supergiant star.</p>
+              <p><strong>Mass:</strong> About 21 times that of our Sun</p>
+            </div>
+            
+            <div class="universe-card" data-object="ton618">
+              <img src="assets/images/universe/ton618.jpg" alt="TON 618">
+              <h4>TON 618</h4>
+              <p>One of the most massive known black holes in the universe, at the center of a distant quasar.</p>
+              <p><strong>Mass:</strong> Approximately 66 billion times that of our Sun</p>
+            </div>
+          </div>
+          
+          <div class="blackhole-facts">
+            <h4 class="universe-subtitle">Mind-Bending Facts</h4>
+            <ul class="blackhole-facts__list">
+              <li><span class="fact-icon"><i class="fas fa-clock"></i></span>Near a black hole's event horizon, time slows down relative to distant observers - a phenomenon called time dilation.</li>
+              <li><span class="fact-icon"><i class="fas fa-ruler"></i></span>If you were to fall into a black hole, you would experience spaghettification - being stretched into a long, thin shape due to the extreme gravity gradient.</li>
+              <li><span class="fact-icon"><i class="fas fa-fire"></i></span>Black holes aren't truly "holes" - they're extremely dense objects where matter has been compressed to an infinitely small point called a singularity.</li>
+              <li><span class="fact-icon"><i class="fas fa-radiation"></i></span>Black holes emit radiation (Hawking radiation) and eventually evaporate over extremely long time periods.</li>
+              <li><span class="fact-icon"><i class="fas fa-compress-alt"></i></span>If Earth were compressed to become a black hole, it would be the size of a cherry.</li>
+            </ul>
+          </div>
+          
+          <div class="blackhole-simulator">
+            <h4 class="universe-subtitle">Advanced Gravity Simulator</h4>
+            <p>See how objects behave near a black hole's gravitational field and witness gravitational lensing effects</p>
+            <div class="blackhole-simulator__canvas" id="gravity-simulator">
+              <div class="blackhole-simulator__black-hole">
+                <div class="blackhole-simulator__event-horizon"></div>
+                <div class="blackhole-simulator__accretion-disk"></div>
+                <div class="blackhole-simulator__gravitational-lensing"></div>
+              </div>
+              <div class="blackhole-simulator__object" data-type="star"></div>
+              
+              <!-- Gravitational lensing background stars -->
+              <div class="blackhole-simulator__background"></div>
+              
+              <!-- Education tooltips -->
+              <div class="simulator-tooltip" id="tooltip-event-horizon">
+                <h5>Event Horizon</h5>
+                <p>The boundary beyond which nothing, not even light, can escape the black hole's gravitational pull.</p>
+              </div>
+              <div class="simulator-tooltip" id="tooltip-accretion">
+                <h5>Accretion Disk</h5>
+                <p>Matter orbiting the black hole at high speeds, heated to extreme temperatures as it spirals inward.</p>
+              </div>
+              <div class="simulator-tooltip" id="tooltip-lensing">
+                <h5>Gravitational Lensing</h5>
+                <p>Light bending around the black hole due to the curvature of spacetime, allowing us to see objects behind it.</p>
+              </div>
+            </div>
+            <div class="blackhole-simulator__controls">
+              <button id="start-simulation" class="simulator-button">Start Simulation</button>
+              <button id="reset-simulation" class="simulator-button">Reset</button>
+              <button id="add-object" class="simulator-button">Add Object</button>
+              <div class="simulator-dropdown">
+                <label for="object-type">Object Type:</label>
+                <select id="object-type">
+                  <option value="star">Star</option>
+                  <option value="planet">Planet</option>
+                  <option value="photon">Light Particle</option>
+                  <option value="dust">Dust Cloud</option>
+                </select>
+              </div>
+              <div class="simulator-slider">
+                <label for="mass-slider">Black Hole Mass: <span id="mass-value">5</span> solar masses</label>
+                <input type="range" id="mass-slider" min="1" max="10" value="5" step="1">
+              </div>
+              <div class="simulator-switch">
+                <label for="show-lensing">Show Gravitational Lensing</label>
+                <input type="checkbox" id="show-lensing" checked>
+              </div>
+              <div class="simulator-switch">
+                <label for="show-tooltips">Show Educational Tooltips</label>
+                <input type="checkbox" id="show-tooltips">
+              </div>
+              <div class="time-control">
+                <button id="slow-time" class="time-button"><i class="fas fa-backward"></i></button>
+                <span id="time-rate">1.0x</span>
+                <button id="fast-time" class="time-button"><i class="fas fa-forward"></i></button>
+              </div>
+            </div>
+            <div class="physics-explanation">
+              <button class="physics-explanation__toggle">How Does This Work? <i class="fas fa-chevron-down"></i></button>
+              <div class="physics-explanation__content">
+                <p>This simulation demonstrates key aspects of black hole physics:</p>
+                <ul>
+                  <li><strong>Gravitational attraction:</strong> Objects are pulled toward the black hole with a force proportional to the black hole's mass and inversely proportional to the square of the distance.</li>
+                  <li><strong>Orbital mechanics:</strong> Objects with sufficient tangential velocity can enter stable orbits around the black hole.</li>
+                  <li><strong>Gravitational lensing:</strong> Light paths bend as they pass through the curved spacetime near the black hole.</li>
+                  <li><strong>Time dilation:</strong> Time appears to slow down near the event horizon due to extreme gravitational effects.</li>
+                  <li><strong>Accretion:</strong> Matter falling into a black hole forms a hot, glowing disk as it spirals inward.</li>
+                </ul>
+                <p>Note: This simulation is simplified for educational purposes. Real black hole physics involves general relativity and more complex calculations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audio files -->
+    <audio id="ambient-sound" loop preload="auto">
+      <source src="assets/sounds/space-ambient.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="guide-voice" preload="auto">
+      <source src="assets/sounds/guide-intro.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="quiz-success" preload="auto">
+      <source src="assets/sounds/quiz-success.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="quiz-error" preload="auto">
+      <source src="assets/sounds/quiz-error.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+      // Planet data - complete data for all planets
+      const planetData = {
+        sun: {
+          name: "Le Soleil",
+          diameter: "1,39 million km",
+          distance: "Centre du système solaire",
+          revolution: "N/A",
+          rotation: "25-35 jours",
+          temperature: "5 500°C (surface), 15 millions °C (centre)",
+          description: "Le Soleil est l'étoile au centre du système solaire. Il s'agit d'une sphère presque parfaite de plasma chaud, avec des mouvements de convection internes qui génèrent un champ magnétique via un mécanisme de dynamo. Le Soleil représente environ 99,86% de la masse totale du système solaire.",
+          image: "assets/images/sun-detail.jpg"
+        },
+        mercury: {
+          name: "Mercure",
+          diameter: "4 880 km",
+          distance: "57,9 millions km",
+          revolution: "88 jours",
+          rotation: "59 jours",
+          temperature: "-173°C à +427°C",
+          description: "Mercure est la planète la plus proche du Soleil et la plus petite du système solaire. Sa surface est couverte de cratères comme notre Lune. En raison de sa proximité avec le Soleil, Mercure connaît des variations extrêmes de température entre le jour et la nuit.",
+          image: "assets/images/mercury-detail.jpg"
+        },
+        venus: {
+          name: "Vénus",
+          diameter: "12 104 km",
+          distance: "108,2 millions km",
+          revolution: "225 jours",
+          rotation: "243 jours (rétrograde)",
+          temperature: "462°C",
+          description: "Vénus est souvent appelée la jumelle de la Terre en raison de sa taille similaire, mais elle est très différente. Son atmosphère dense de dioxyde de carbone crée un effet de serre incontrôlé, faisant de Vénus la planète la plus chaude du système solaire malgré sa distance plus grande du Soleil que Mercure.",
+          image: "assets/images/venus-detail.jpg"
+        },
+        earth: {
+          name: "La Terre",
+          diameter: "12 742 km",
+          distance: "149,6 millions km",
+          revolution: "365,25 jours",
+          rotation: "23 heures 56 minutes",
+          temperature: "-88°C à +58°C",
+          description: "La Terre est la troisième planète à partir du Soleil et le seul objet astronomique connu pour abriter la vie. La Terre a une atmosphère riche en azote et en oxygène et possède un champ magnétique puissant qui nous protège du vent solaire. Plus de 70% de sa surface est couverte d'eau liquide.",
+          image: "assets/images/earth-detail.jpg"
+        },
+        mars: {
+          name: "Mars",
+          diameter: "6 779 km",
+          distance: "227,9 millions km",
+          revolution: "687 jours",
+          rotation: "24 heures 37 minutes",
+          temperature: "-153°C à +20°C",
+          description: "Mars est la quatrième planète à partir du Soleil. Souvent appelée la \"planète rouge\" en raison de son apparence rougeâtre causée par l'oxyde de fer à sa surface. Mars possède deux petites lunes, Phobos et Deimos, et présente des caractéristiques comme le plus grand volcan et le plus grand canyon du système solaire.",
+          image: "assets/images/mars-detail.jpg"
+        },
+        jupiter: {
+          name: "Jupiter",
+          diameter: "139 820 km",
+          distance: "778,5 millions km",
+          revolution: "11,86 années",
+          rotation: "9 heures 55 minutes",
+          temperature: "-145°C (nuages supérieurs)",
+          description: "Jupiter est la plus grande planète du système solaire. C'est une géante gazeuse composée principalement d'hydrogène et d'hélium. Jupiter possède au moins 79 lunes et présente des caractéristiques remarquables comme sa Grande Tache Rouge, un anticyclone massif qui existe depuis au moins 400 ans.",
+          image: "assets/images/jupiter-detail.jpg"
+        },
+        saturn: {
+          name: "Saturne",
+          diameter: "116 460 km",
+          distance: "1,43 milliard km",
+          revolution: "29,46 années",
+          rotation: "10 heures 33 minutes",
+          temperature: "-178°C",
+          description: "Saturne est connue pour son système d'anneaux spectaculaire, composé principalement de particules de glace. C'est la deuxième plus grande planète du système solaire et, comme Jupiter, elle est composée principalement d'hydrogène et d'hélium. Saturne a 82 lunes connues, dont Titan, la deuxième plus grande lune du système solaire.",
+          image: "assets/images/saturn-detail.jpg"
+        },
+        uranus: {
+          name: "Uranus",
+          diameter: "50 724 km",
+          distance: "2,87 milliards km",
+          revolution: "84,01 années",
+          rotation: "17 heures 14 minutes (rétrograde)",
+          temperature: "-224°C",
+          description: "Uranus est une géante de glace qui tourne sur un axe presque parallèle à son orbite, contrairement aux autres planètes. Cette inclinaison extrême fait qu'Uranus roule sur le côté de son orbite. Sa couleur bleu-vert vient du méthane dans son atmosphère qui absorbe la lumière rouge. Uranus possède 27 lunes connues et un système d'anneaux peu visible.",
+          image: "assets/images/uranus-detail.jpg"
+        },
+        neptune: {
+          name: "Neptune",
+          diameter: "49 244 km",
+          distance: "4,5 milliards km",
+          revolution: "164,8 années",
+          rotation: "16 heures 6 minutes",
+          temperature: "-218°C",
+          description: "Neptune est la huitième et la plus éloignée planète du Soleil. Comme Uranus, c'est une géante de glace avec une composition similaire. Neptune possède les vents les plus rapides du système solaire, atteignant 2 100 km/h. Elle a 14 lunes connues, dont Triton qui est géologiquement actif et orbite dans la direction opposée à la rotation de Neptune.",
+          image: "assets/images/neptune-detail.jpg"
+        }
+      };
+      
+      // Remove hover effect texts and replace with interactive astronaut guidance
+      document.querySelectorAll('.planet-hover-effect').forEach(effect => {
+        effect.remove();
+      });
+      
+      // Astronaut guide tour steps
+      const guideTour = [
+        {
+          message: "Bienvenue dans notre système solaire interactif ! Je suis votre guide astronaute.",
+          highlight: null
+        },
+        {
+          message: "Vous pouvez cliquer sur n'importe quelle planète pour obtenir des informations détaillées à son sujet.",
+          highlight: ".planet--earth"
+        },
+        {
+          message: "Utilisez ce panneau de contrôle pour modifier l'expérience. Essayez d'activer ou désactiver les fonctionnalités.",
+          highlight: ".control-panel"
+        },
+        {
+          message: "Ce curseur contrôle la vitesse de révolution des planètes autour du soleil.",
+          highlight: "#orbit-speed"
+        },
+        {
+          message: "Celui-ci contrôle la vitesse de rotation des planètes sur elles-mêmes.",
+          highlight: "#rotation-speed"
+        },
+        {
+          message: "Vous pouvez activer le son pour entendre des effets sonores lorsque vous survolez les planètes.",
+          highlight: "#toggle-sound"
+        },
+        {
+          message: "Voilà ! Vous êtes prêt à explorer notre système solaire. Amusez-vous bien !",
+          highlight: null
+        }
+      ];
+      
+      // Setup astronaut guide functionality
+      let currentStep = 0;
+      const astronautGuide = document.querySelector('.astronaut-guide');
+      const speechBubble = document.querySelector('.astronaut-guide__speech-bubble p');
+      const guideButton = document.querySelector('.astronaut-guide__button');
+      const focusOverlay = document.querySelector('.focus-overlay');
+      
+      // Start guide tour
+      guideButton.addEventListener('click', () => {
+        advanceGuideTour();
+      });
+      
+      function advanceGuideTour() {
+        if (currentStep < guideTour.length) {
+          speechBubble.textContent = guideTour[currentStep].message;
+          
+          // Apply highlighting if needed
+          if (guideTour[currentStep].highlight) {
+            highlightElement(guideTour[currentStep].highlight);
+          } else {
+            removeHighlight();
+          }
+          
+          // Play guide voice (in a real implementation, you would have different audio files for each step)
+          playGuideAudio();
+          
+          // Update button text for last step
+          if (currentStep === guideTour.length - 1) {
+            guideButton.textContent = "Terminer la visite";
+          }
+          
+          currentStep++;
+        } else {
+          // End tour
+          astronautGuide.classList.add('astronaut-guide--minimized');
+          removeHighlight();
+        }
+      }
+      
+      function highlightElement(selector) {
+        const element = document.querySelector(selector);
+        if (element) {
+          focusOverlay.classList.add('focus-overlay--active');
+          
+          const rect = element.getBoundingClientRect();
+          const highlightCircle = document.createElement('div');
+          highlightCircle.classList.add('focus-overlay__highlight');
+          
+          highlightCircle.style.top = `${rect.top + rect.height/2}px`;
+          highlightCircle.style.left = `${rect.left + rect.width/2}px`;
+          highlightCircle.style.width = `${rect.width + 40}px`;
+          highlightCircle.style.height = `${rect.height + 40}px`;
+          
+          focusOverlay.innerHTML = '';
+          focusOverlay.appendChild(highlightCircle);
+          
+          // Ensure the highlighted element is visible
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+      
+      function removeHighlight() {
+        focusOverlay.classList.remove('focus-overlay--active');
+        focusOverlay.innerHTML = '';
+      }
+      
+      function playGuideAudio() {
+        const guideVoice = document.getElementById('guide-voice');
+        guideVoice.currentTime = 0;
+        guideVoice.play().catch(e => console.log("Audio couldn't play automatically: ", e));
+      }
+      
+      // Control panel functionality
+      document.querySelector('.control-panel__toggle').addEventListener('click', function() {
+        document.querySelector('.control-panel').classList.toggle('control-panel--active');
+      });
+      
+      // Initial control setup
+      document.querySelector('.control-panel').classList.add('control-panel--active');
+      
+      // Theme toggle
+      document.getElementById('theme-toggle').addEventListener('change', function() {
+        document.body.classList.toggle('galaxy--night-mode');
+      });
+      
+      // Speed controls - Simplified orbit speed control
+      document.getElementById('orbit-speed').addEventListener('input', function() {
+        const speedFactor = parseFloat(this.value);
+        document.querySelector('.control-panel__info').textContent = speedFactor + 'x';
+        
+        // Apply to all planet orbits
+        const planets = document.querySelectorAll('.planet');
+        planets.forEach(planet => {
+          const animations = planet.getAnimations();
+          animations.forEach(animation => {
+            if (animation.animationName === 'animation-orbit') {
+              animation.playbackRate = speedFactor;
+            }
+          });
+        });
+      });
+      
+      // Completely revised rotation speed control
+      document.getElementById('rotation-speed').addEventListener('input', function() {
+        const speedFactor = parseFloat(this.value);
+        document.querySelectorAll('.control-panel__info')[1].textContent = speedFactor + 'x';
+        
+        // Create a global style that overwrites all rotation animations
+        let styleElement = document.getElementById('rotation-speed-style');
+        if (!styleElement) {
+          styleElement = document.createElement('style');
+          styleElement.id = 'rotation-speed-style';
+          document.head.appendChild(styleElement);
+        }
+        
+        // Generate styles for all possible elements that rotate
+        styleElement.textContent = `
+          .planet-surface {
+            animation-duration: calc(var(--base-rotation-duration, 5s) / ${speedFactor}) !important;
+          }
+          .sun::after {
+            animation-duration: calc(100s / ${speedFactor}) !important;
+          }
+          .sun .planet-surface {
+            animation-duration: calc(25s / ${speedFactor}) !important;
+          }
+        `;
+        
+        // Also update all animations that are already running
+        document.getAnimations().forEach(animation => {
+          if (animation.animationName === 'animation-self-rotate') {
+            animation.playbackRate = speedFactor;
+          }
+        });
+      });
+      
+      // Toggle buttons
+      document.getElementById('toggle-orbits').addEventListener('click', function() {
+        this.classList.toggle('control-panel__button--active');
+        document.querySelector('.galaxy__orbit-paths').style.display = 
+          this.classList.contains('control-panel__button--active') ? 'block' : 'none';
+      });
+      
+      document.getElementById('toggle-labels').addEventListener('click', function() {
+        this.classList.toggle('control-panel__button--active');
+        const planets = document.querySelectorAll('.planet, .sun');
+        planets.forEach(planet => {
+          planet.style.color = 
+            this.classList.contains('control-panel__button--active') ? 'white' : 'transparent';
+        });
+      });
+      
+      // Sound controls - Ensure audio works properly
+      let audioContext;
+      let soundEnabled = false;
+      
+      // Preload sounds
+      const soundFiles = {
+        ambient: 'assets/sounds/space-ambient.mp3',
+        sun: 'assets/sounds/sun.mp3',
+        mercury: 'assets/sounds/mercury.mp3',
+        venus: 'assets/sounds/venus.mp3',
+        earth: 'assets/sounds/earth.mp3',
+        mars: 'assets/sounds/mars.mp3',
+        jupiter: 'assets/sounds/jupiter.mp3',
+        saturn: 'assets/sounds/saturn.mp3',
+        uranus: 'assets/sounds/uranus.mp3',
+        neptune: 'assets/sounds/neptune.mp3'
+      };
+      
+      // Create audio elements for all sounds
+      const planetSounds = {};
+      Object.entries(soundFiles).forEach(([key, path]) => {
+        const audio = new Audio();
+        audio.src = path;
+        audio.preload = 'auto';
+        planetSounds[key] = audio;
+      });
+      
+      document.getElementById('toggle-sound').addEventListener('click', function() {
+        this.classList.toggle('control-panel__button--active');
+        soundEnabled = this.classList.contains('control-panel__button--active');
+        
+        if (soundEnabled) {
+          // Enable sound context on user interaction
+          if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          }
+          planetSounds.ambient.loop = true;
+          planetSounds.ambient.volume = 0.3;
+          planetSounds.ambient.play().catch(e => console.log("Ambient sound couldn't play automatically: ", e));
+        } else {
+          planetSounds.ambient.pause();
+        }
+      });
+      
+      // Planet hover sound effects
+      const planets = document.querySelectorAll('[data-planet]');
+      planets.forEach(planet => {
+        planet.addEventListener('mouseenter', function() {
+          if (soundEnabled) {
+            const planetName = this.dataset.planet;
+            if (planetSounds[planetName]) {
+              planetSounds[planetName].currentTime = 0;
+              planetSounds[planetName].volume = 0.2;
+              planetSounds[planetName].play().catch(e => console.log(`Sound for ${planetName} couldn't play: `, e));
+            }
+          }
+        });
+        
+        // Planet click for info
+        planet.addEventListener('click', function() {
+          const planetName = this.dataset.planet;
+          if (planetData[planetName]) {
+            // Fill the modal with data
+            document.getElementById('planet-name').textContent = planetData[planetName].name;
+            document.getElementById('planet-diameter').textContent = planetData[planetName].diameter;
+            document.getElementById('planet-distance').textContent = planetData[planetName].distance;
+            document.getElementById('planet-revolution').textContent = planetData[planetName].revolution;
+            document.getElementById('planet-rotation').textContent = planetData[planetName].rotation;
+            document.getElementById('planet-temperature').textContent = planetData[planetName].temperature;
+            document.getElementById('planet-description').textContent = planetData[planetName].description;
+            document.getElementById('planet-image').src = planetData[planetName].image;
+            
+            // Show the modal
+            document.querySelector('.planet-info').classList.add('planet-info--active');
+            document.querySelector('.planet-info-overlay').classList.add('planet-info__overlay--active');
+          }
+        });
+      });
+      
+      // Close planet info modal
+      document.querySelector('.planet-info__close').addEventListener('click', function() {
+        document.querySelector('.planet-info').classList.remove('planet-info--active');
+        document.querySelector('.planet-info-overlay').classList.remove('planet-info__overlay--active');
+      });
+      
+      document.querySelector('.planet-info-overlay').addEventListener('click', function() {
+        document.querySelector('.planet-info').classList.remove('planet-info--active');
+        this.classList.remove('planet-info__overlay--active');
+      });
+      
+      // Enhanced comet animation
+      function initCometEffects() {
+        const comets = document.querySelectorAll('.comet');
+        
+        comets.forEach((comet, index) => {
+          // Add unique animation properties for each comet
+          const duration = 60 + (index * 15); // Different duration for each comet
+          const delay = index * 30; // Stagger the comets
+          
+          // Different animation paths
+          const isAlt = comet.classList.contains('comet--alt');
+          const animationName = isAlt ? 'comet-orbit-alt' : 'comet-orbit';
+          
+          // Apply animation
+          comet.style.animation = `${animationName} ${duration}s linear infinite, comet-glow 3s ease-in-out infinite`;
+          comet.style.animationDelay = `${delay}s, 0s`;
+          
+          // Add particle effects
+          const particles = comet.querySelector('.comet__particles');
+          if (particles) {
+            createCometParticles(particles);
+          }
+        });
+        
+        // Add custom animation for the second comet if it exists
+        const altComet = document.querySelector('.comet--alt');
+        if (altComet) {
+          // Create a custom animation for the alt comet path
+          const style = document.createElement('style');
+          style.textContent = `
+            @keyframes comet-orbit-alt {
+              0% {
+                top: 20%;
+                left: 110%;
+                transform: rotate(160deg) scale(0.6);
+              }
+              25% {
+                top: 40%;
+                left: 70%;
+                transform: rotate(140deg) scale(1.0);
+              }
+              50% {
+                top: 60%;
+                left: 40%;
+                transform: rotate(120deg) scale(0.8);
+              }
+              75% {
+                top: 40%;
+                left: 10%;
+                transform: rotate(140deg) scale(1.1);
+              }
+              100% {
+                top: 20%;
+                left: 110%;
+                transform: rotate(160deg) scale(0.6);
+              }
+            }
+          `;
+          document.head.appendChild(style);
+          
+          // Add a different trail appearance for the alt comet
+          altComet.style.setProperty('--trail-color', 'rgba(200, 255, 100, 0.5)');
+        }
+      }
+      
+      // Create particle trail effect for comets
+      function createCometParticles(container) {
+        // Create particle emitter function
+        function emitParticles() {
+          // Create a particle at random intervals
+          const particle = document.createElement('div');
+          particle.className = 'comet-particle';
+          
+          // Random size
+          const size = 1 + Math.random() * 3;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          
+          // Random position around the comet head
+          const x = (Math.random() - 0.5) * 5;
+          const y = (Math.random() - 0.5) * 5;
+          particle.style.left = `${x + 4}px`; // centered on comet
+          particle.style.top = `${y + 4}px`;
+          
+          // Random direction
+          const directionX = (Math.random() - 0.5) * 30 - 10; // Mostly backwards
+          const directionY = (Math.random() - 0.5) * 20;
+          particle.style.setProperty('--x', `${directionX}px`);
+          particle.style.setProperty('--y', `${directionY}px`);
+          
+          // Animation
+          particle.style.animation = `comet-particle ${1 + Math.random()}s ease-out`;
+          
+          // Add to container
+          container.appendChild(particle);
+          
+          // Remove after animation completes
+          setTimeout(() => {
+            if (container.contains(particle)) {
+              container.removeChild(particle);
+            }
+          }, 2000);
+        }
+        
+        // Start emitting particles
+        setInterval(emitParticles, 100); // Every 100ms
+      }
+      
+      // Enhanced asteroid belt
+      function enhanceAsteroidBelt() {
+        const asteroids = document.querySelectorAll('.asteroid-belt__particle');
+        
+        asteroids.forEach((asteroid, index) => {
+          // Add random wobble effect to some asteroids
+          if (index % 5 === 0) {
+            const currentAnimations = asteroid.style.animation || '';
+            asteroid.style.animation = `${currentAnimations}, asteroid-wobble ${3 + Math.random() * 2}s ease-in-out infinite`;
+          }
+          
+          // Add random colors to some asteroids
+          if (index % 7 === 0) {
+            const hue = 20 + Math.round(Math.random() * 30); // brownish hues
+            const saturation = 70 + Math.round(Math.random() * 20);
+            const lightness = 60 + Math.round(Math.random() * 20);
+            asteroid.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+          }
+        });
+      }
+      
+      // Initialize comet and asteroid effects when document is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize enhanced comet and asteroid effects
+        initCometEffects();
+        enhanceAsteroidBelt();
+        
+        // Fix Universe Explorer button functionality
+        const universeExplorerBtn = document.querySelector('.universe-explorer__toggle');
+        const universeModal = document.querySelector('.universe-modal');
+        const universeOverlay = document.querySelector('.universe-overlay');
+        const universeModalClose = document.querySelector('.universe-modal__close');
+        
+        if (universeExplorerBtn) {
+          universeExplorerBtn.addEventListener('click', function() {
+            // Open the universe explorer modal
+            universeModal.classList.add('universe-modal--active');
+            universeOverlay.classList.add('universe-overlay--active');
+            
+            // Initialize the first visible section (black holes by default)
+            const activeSection = document.querySelector('.universe-nav-btn--active').getAttribute('data-target');
+            if (activeSection === 'black-holes') {
+              initBlackHoleSimulation();
+            }
+          });
+        }
+        
+        if (universeModalClose) {
+          universeModalClose.addEventListener('click', function() {
+            // Close the universe explorer modal
+            universeModal.classList.remove('universe-modal--active');
+            universeOverlay.classList.remove('universe-overlay--active');
+          });
+        }
+        
+        if (universeOverlay) {
+          universeOverlay.addEventListener('click', function() {
+            // Close modal when clicking overlay
+            universeModal.classList.remove('universe-modal--active');
+            universeOverlay.classList.remove('universe-overlay--active');
+          });
+        }
+        
+        // Fix Universe navigation
+        const universeNavButtons = document.querySelectorAll('.universe-nav-btn');
+        universeNavButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            // Hide all sections
+            document.querySelectorAll('.universe-section').forEach(section => {
+              section.style.display = 'none';
+            });
+            
+            // Show selected section
+            const targetSection = this.getAttribute('data-target');
+            const sectionElement = document.getElementById(targetSection);
+            if (sectionElement) {
+              sectionElement.style.display = 'block';
+            }
+            
+            // Update active button
+            universeNavButtons.forEach(btn => {
+              btn.classList.remove('universe-nav-btn--active');
+            });
+            this.classList.add('universe-nav-btn--active');
+            
+            // Initialize black hole simulator if black holes section is selected
+            if (targetSection === 'black-holes') {
+              initBlackHoleSimulation();
+            }
+          });
+        });
+      });
+      
+      // Initialize GSAP animations for parallax effect
+      gsap.registerPlugin(ScrollTrigger);
+      
+      gsap.to(".star", {
+        scrollTrigger: {
+          trigger: "body",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1
+        },
+        y: (i, target) => -ScrollTrigger.maxScroll(window) * target.dataset.speed || -0.2,
+        ease: "none"
+      });
+      
+      // Add data-speed attribute to stars for parallax
+      document.querySelectorAll('.star').forEach((star, index) => {
+        const speed = Math.random() * 0.4 + 0.1;
+        star.setAttribute('data-speed', speed.toFixed(2));
+      });
+      
+      // Initialize black hole physics simulation
+      function initBlackHoleSimulation() {
+        console.log("Initializing black hole simulation");
+        const simulator = document.getElementById('gravity-simulator');
+        if (!simulator) {
+          console.error("Black hole simulator element not found");
+          return;
+        }
+        
+        const objectTypeSelector = document.getElementById('object-type');
+        const blackHole = simulator.querySelector('.blackhole-simulator__black-hole');
+        const eventHorizon = simulator.querySelector('.blackhole-simulator__event-horizon');
+        const accretionDisk = simulator.querySelector('.blackhole-simulator__accretion-disk');
+        const gravitationalLensing = simulator.querySelector('.blackhole-simulator__gravitational-lensing');
+        const massSlider = document.getElementById('mass-slider');
+        const massValueDisplay = document.getElementById('mass-value');
+        const startBtn = document.getElementById('start-simulation');
+        const resetBtn = document.getElementById('reset-simulation');
+        const addObjectBtn = document.getElementById('add-object');
+        const showLensingToggle = document.getElementById('show-lensing');
+        const showTooltipsToggle = document.getElementById('show-tooltips');
+        const slowTimeBtn = document.getElementById('slow-time');
+        const fastTimeBtn = document.getElementById('fast-time');
+        const timeRateDisplay = document.getElementById('time-rate');
+        const physicsToggle = document.querySelector('.physics-explanation__toggle');
+        
+        // Check if elements exist
+        if (!blackHole || !eventHorizon || !accretionDisk || !massSlider) {
+          console.error("Required black hole elements are missing");
+          return;
+        }
+        
+        let simulationRunning = false;
+        let animationFrame;
+        let timeRate = 1.0;
+        let objectsInSimulation = 1; // Start with one object
+        let simulationObjects = [];
+        
+        // Create starfield background for lensing effect
+        createStarfield();
+        
+        // Initialize the first object
+        const initialObject = simulator.querySelector('.blackhole-simulator__object');
+        if (initialObject) {
+          resetObject(initialObject);
+        }
+        
+        function createStarfield() {
+          const background = simulator.querySelector('.blackhole-simulator__background');
+          if (!background) return;
+          
+          background.innerHTML = '';
+          
+          for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'background-star';
+            const size = Math.random() * 2 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.opacity = Math.random() * 0.7 + 0.3;
+            background.appendChild(star);
+          }
+        }
+        
+        function resetObject(element) {
+          if (!element) return;
+          
+          // Random position at the edge of the simulator
+          const simulatorRect = simulator.getBoundingClientRect();
+          const angle = Math.random() * Math.PI * 2;
+          const distance = Math.min(simulatorRect.width, simulatorRect.height) * 0.4;
+          
+          const x = simulatorRect.width / 2 + Math.cos(angle) * distance;
+          const y = simulatorRect.height / 2 + Math.sin(angle) * distance;
+          
+          // Set initial velocity tangential to the black hole
+          const tangentialAngle = angle + Math.PI / 2;
+          const speed = 1 + Math.random() * 2; // Random orbital velocity
+          
+          const objectType = element.dataset.type || 'star';
+          updateObjectAppearance(element, objectType);
+          
+          // Remove previous object from array if it exists
+          simulationObjects = simulationObjects.filter(obj => obj.element !== element);
+          
+          // Add new object to simulation objects array
+          simulationObjects.push({
+            element: element,
+            position: { x, y },
+            velocity: { 
+              x: Math.cos(tangentialAngle) * speed,
+              y: Math.sin(tangentialAngle) * speed
+            },
+            type: objectType,
+            mass: objectType === 'star' ? 0.5 : 
+                  objectType === 'planet' ? 0.3 : 
+                  objectType === 'dust' ? 0.1 : 0.05,
+            trail: [],
+            active: true
+          });
+          
+          element.style.left = `${x}px`;
+          element.style.top = `${y}px`;
+          
+          // Reset element appearance
+          element.style.transform = 'scale(1)';
+          element.style.opacity = '1';
+          element.style.display = 'block';
+        }
+        
+        function updateObjectAppearance(element, type) {
+          if (!element) return;
+          
+          // Clear previous classes
+          element.className = 'blackhole-simulator__object';
+          element.dataset.type = type;
+          
+          // Add type-specific class
+          element.classList.add(`object-type-${type}`);
+          
+          // Add appropriate visual styles based on type
+          element.innerHTML = '';
+          
+          switch (type) {
+            case 'star':
+              const glow = document.createElement('div');
+              glow.className = 'object-glow';
+              element.appendChild(glow);
+              break;
+            case 'photon':
+              const trail = document.createElement('div');
+              trail.className = 'photon-trail';
+              element.appendChild(trail);
+              break;
+            case 'dust':
+              // Create multiple dust particles
+              for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'dust-particle';
+                element.appendChild(particle);
+              }
+              break;
+          }
+        }
+        
+        function createNewObject() {
+          if (objectsInSimulation > 10) return; // Limit to avoid performance issues
+          
+          const newObject = document.createElement('div');
+          newObject.className = 'blackhole-simulator__object';
+          newObject.dataset.type = objectTypeSelector.value;
+          simulator.appendChild(newObject);
+          
+          resetObject(newObject);
+          objectsInSimulation++;
+        }
+        
+        function updateBlackHoleMass() {
+          if (!massSlider || !massValueDisplay || !eventHorizon || !accretionDisk || !gravitationalLensing || !blackHole) return;
+          
+          const mass = massSlider.value;
+          massValueDisplay.textContent = mass;
+          
+          const scale = 0.3 + (mass * 0.1); // Scale between 0.4 and 1.3
+          
+          // Update event horizon size
+          eventHorizon.style.transform = `translate(-50%, -50%) scale(${scale})`;
+          
+          // Update accretion disk
+          accretionDisk.style.transform = `translate(-50%, -50%) scale(${scale * 1.2})`;
+          
+          // Update gravitational lensing effect
+          if (gravitationalLensing) {
+            gravitationalLensing.style.transform = `translate(-50%, -50%) scale(${scale * 2})`;
+          }
+          
+          // Store the mass for physics calculations
+          blackHole.setAttribute('data-mass', mass);
+          
+          // Update visual effect based on mass
+          const glowSize = 20 + mass * 5;
+          const glowIntensity = 0.3 + (mass * 0.05);
+          eventHorizon.style.boxShadow = `0 0 ${glowSize}px rgba(100, 100, 255, ${glowIntensity})`;
+        }
+        
+        function applyGravitationalLensing() {
+          if (!showLensingToggle || !showLensingToggle.checked || !blackHole) {
+            const background = simulator.querySelector('.blackhole-simulator__background');
+            if (background) {
+              background.style.filter = 'none';
+            }
+            return;
+          }
+          
+          const background = simulator.querySelector('.blackhole-simulator__background');
+          if (!background) return;
+          
+          const mass = parseInt(blackHole.getAttribute('data-mass'));
+          const lensingSeverity = mass * 0.1; // More mass = more severe lensing
+          
+          // Apply distortion effect to background stars
+          background.style.filter = `
+            url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>
+                <filter id='blackhole-lens'>
+                    <feGaussianBlur in='SourceGraphic' stdDeviation='2' />
+                    <feDisplacementMap in='SourceGraphic' scale='${lensingSeverity * 20}' 
+                        xChannelSelector='R' yChannelSelector='G'/>
+                </filter>
+            </svg>#blackhole-lens")
+          `;
+        }
+        
+        function calculateGravitationalForce(object, blackHolePos, blackHoleMass) {
+          const dx = blackHolePos.x - object.position.x;
+          const dy = blackHolePos.y - object.position.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          // Calculate distance to event horizon
+          const eventHorizonRadius = (20 + blackHoleMass * 2); // Approximate radius in pixels
+          
+          // If inside event horizon, object is captured
+          if (distance < eventHorizonRadius) {
+            return { 
+              captured: true,
+              forceX: dx * 0.5, // Strong pull toward center
+              forceY: dy * 0.5
+            };
+          }
+          
+          // Gravitational force proportional to mass and inverse square of distance
+          // F = G * m1 * m2 / r² (simplified for simulation)
+          const G = 0.5; // Gravitational constant for simulation
+          const forceMagnitude = G * blackHoleMass * object.mass / (distance * distance);
+          
+          // Apply relativistic effects near the black hole
+          const relativeFactor = Math.min(1, eventHorizonRadius * 3 / distance);
+          const adjustedForceMagnitude = forceMagnitude * (1 + relativeFactor);
+          
+          // Calculate force components
+          const forceX = adjustedForceMagnitude * dx / distance;
+          const forceY = adjustedForceMagnitude * dy / distance;
+          
+          return { captured: false, forceX, forceY };
+        }
+        
+        function runSimulation() {
+          if (simulationRunning) return;
+          
+          simulationRunning = true;
+          
+          function animate() {
+            if (!blackHole) {
+              simulationRunning = false;
+              return;
+            }
+            
+            // Get black hole position and mass
+            const blackHoleRect = blackHole.getBoundingClientRect();
+            const simulatorRect = simulator.getBoundingClientRect();
+            
+            const blackHolePos = {
+              x: blackHoleRect.left - simulatorRect.left + blackHoleRect.width / 2,
+              y: blackHoleRect.top - simulatorRect.top + blackHoleRect.height / 2
+            };
+            
+            const blackHoleMass = parseInt(blackHole.getAttribute('data-mass'));
+            
+            // Update each object
+            simulationObjects.forEach(object => {
+              if (!object.active || !object.element) return;
+              
+              // Calculate gravitational effects
+              const gravity = calculateGravitationalForce(object, blackHolePos, blackHoleMass);
+              
+              if (gravity.captured) {
+                // Object is captured by black hole
+                captureObject(object);
+                return;
+              }
+              
+              // Apply gravitational acceleration
+              object.velocity.x += gravity.forceX * timeRate;
+              object.velocity.y += gravity.forceY * timeRate;
+              
+              // Apply some dampening for dust particles
+              if (object.type === 'dust') {
+                object.velocity.x *= 0.995;
+                object.velocity.y *= 0.995;
+              }
+              
+              // Special case for photons (light)
+              if (object.type === 'photon') {
+                // Normalize velocity to maintain constant speed for light
+                const speed = Math.sqrt(object.velocity.x * object.velocity.x + object.velocity.y * object.velocity.y);
+                object.velocity.x = object.velocity.x / speed * 5; // Light moves faster
+                object.velocity.y = object.velocity.y / speed * 5;
+              }
+              
+              // Update position based on velocity
+              object.position.x += object.velocity.x * timeRate;
+              object.position.y += object.velocity.y * timeRate;
+              
+              // Add position to trail (for visualizing the path)
+              if (object.type !== 'dust') { // Don't track trails for dust clouds
+                object.trail.push({...object.position});
+                
+                // Limit trail length
+                if (object.trail.length > 100) {
+                  object.trail.shift();
+                }
+              }
+              
+              // Apply updated position to visual element
+              object.element.style.left = `${object.position.x}px`;
+              object.element.style.top = `${object.position.y}px`;
+              
+              // Calculate rotation based on velocity (for non-photon objects)
+              if (object.type !== 'photon') {
+                const rotation = Math.atan2(object.velocity.y, object.velocity.x) * (180 / Math.PI);
+                object.element.style.transform = `rotate(${rotation}deg)`;
+              }
+              
+              // Handle photon trail
+              if (object.type === 'photon') {
+                const trail = object.element.querySelector('.photon-trail');
+                if (trail && object.trail.length > 1) {
+                  let pathD = `M ${object.trail[0].x} ${object.trail[0].y}`;
+                  for (let i = 1; i < object.trail.length; i++) {
+                    pathD += ` L ${object.trail[i].x} ${object.trail[i].y}`;
+                  }
+                  
+                  // Create SVG path if it doesn't exist
+                  if (!object.svgPath) {
+                    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    svg.style.position = 'absolute';
+                    svg.style.top = '0';
+                    svg.style.left = '0';
+                    svg.style.width = '100%';
+                    svg.style.height = '100%';
+                    svg.style.pointerEvents = 'none';
+                    svg.style.zIndex = '1';
+                    
+                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    path.setAttribute('stroke', 'rgba(255,255,255,0.6)');
+                    path.setAttribute('stroke-width', '2');
+                    path.setAttribute('fill', 'none');
+                    
+                    svg.appendChild(path);
+                    simulator.appendChild(svg);
+                    
+                    object.svgPath = path;
+                  }
+                  
+                  // Update path
+                  object.svgPath.setAttribute('d', pathD);
+                }
+              }
+              
+              // Check if object is out of bounds
+              const bounds = simulator.getBoundingClientRect();
+              if (
+                object.position.x < -50 || 
+                object.position.x > bounds.width + 50 || 
+                object.position.y < -50 || 
+                object.position.y > bounds.height + 50
+              ) {
+                // Object left the simulation area
+                object.active = false;
+                object.element.style.display = 'none';
+                
+                // Clean up SVG path for photons
+                if (object.svgPath) {
+                  object.svgPath.remove();
+                }
+              }
+            });
+            
+            // Apply gravitational lensing effect
+            applyGravitationalLensing();
+            
+            // Continue animation if any objects are still active
+            if (simulationObjects.some(obj => obj.active)) {
+              animationFrame = requestAnimationFrame(animate);
+            } else {
+              simulationRunning = false;
+            }
+          }
+          
+          animate();
+        }
+        
+        function captureObject(object) {
+          if (!object || !object.element) return;
+          
+          object.active = false;
+          
+          // Visual effect for capture
+          object.element.style.transition = 'transform 1s, opacity 1s';
+          object.element.style.transform = 'scale(0.1)';
+          object.element.style.opacity = '0';
+          
+          // Add particle effect to accretion disk
+          if (object.type !== 'photon') { // Photons don't add to accretion disk
+            addToAccretionDisk(object);
+          }
+          
+          // Remove element after animation completes
+          setTimeout(() => {
+            if (object.svgPath) {
+              object.svgPath.remove();
+            }
+            object.element.remove();
+          }, 1000);
+        }
+        
+        function addToAccretionDisk(object) {
+          if (!object || !object.position || !blackHole) return;
+          
+          // Create particles that join the accretion disk
+          const numParticles = object.type === 'star' ? 10 : 
+                               object.type === 'planet' ? 7 : 4;
+          
+          // Get black hole position
+          const blackHoleRect = blackHole.getBoundingClientRect();
+          const simulatorRect = simulator.getBoundingClientRect();
+          
+          const blackHolePos = {
+            x: blackHoleRect.left - simulatorRect.left + blackHoleRect.width / 2,
+            y: blackHoleRect.top - simulatorRect.top + blackHoleRect.height / 2
+          };
+          
+          for (let i = 0; i < numParticles; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'accretion-particle';
+            
+            // Start at object position
+            particle.style.left = `${object.position.x}px`;
+            particle.style.top = `${object.position.y}px`;
+            
+            // Random color based on object type
+            const hue = object.type === 'star' ? '60' : // Yellow
+                       object.type === 'planet' ? '180' : // Blue-green
+                       '0'; // Red for dust
+                       
+            particle.style.backgroundColor = `hsla(${hue}, 100%, 70%, 0.8)`;
+            
+            simulator.appendChild(particle);
+            
+            // Calculate angle to join accretion disk
+            const angle = Math.atan2(
+              object.position.y - blackHolePos.y,
+              object.position.x - blackHolePos.x
+            ) + (Math.random() * Math.PI / 4 - Math.PI / 8); // Add some variation
+            
+            const radius = 40 + (Math.random() * 40); // Accretion disk radius
+            
+            // Target position on accretion disk
+            const targetX = blackHolePos.x + Math.cos(angle) * radius;
+            const targetY = blackHolePos.y + Math.sin(angle) * radius;
+            
+            // Use GSAP for smooth animation if available
+            if (typeof gsap !== 'undefined') {
+              gsap.to(particle, {
+                left: targetX,
+                top: targetY,
+                duration: 0.8 + Math.random() * 0.4,
+                ease: "power2.in",
+                onComplete: () => {
+                  // Once in place, orbit around black hole
+                  const orbitDuration = 2 + Math.random() * 2;
+                  
+                  gsap.to(particle, {
+                    rotation: '+=360',
+                    duration: orbitDuration,
+                    ease: "none",
+                    repeat: 3,
+                    onComplete: () => {
+                      // Finally get consumed by the black hole
+                      gsap.to(particle, {
+                        left: blackHolePos.x,
+                        top: blackHolePos.y,
+                        scale: 0,
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: "power2.in",
+                        onComplete: () => particle.remove()
+                      });
+                    }
+                  });
+                }
+              });
+            } else {
+              // Fallback animation without GSAP
+              setTimeout(() => particle.remove(), 3000);
+            }
+          }
+        }
+        
+        function resetSimulation() {
+          // Stop current simulation
+          cancelAnimationFrame(animationFrame);
+          simulationRunning = false;
+          
+          // Clear all objects except the first one
+          simulationObjects.forEach((obj, index) => {
+            if (index > 0 && obj.element) {
+              if (obj.svgPath) {
+                obj.svgPath.remove();
+              }
+              obj.element.remove();
+            }
+          });
+          
+          // Clear any SVG paths
+          simulator.querySelectorAll('svg').forEach(svg => svg.remove());
+          
+          // Reset the first object
+          const firstObject = simulator.querySelector('.blackhole-simulator__object');
+          if (firstObject) {
+            firstObject.style.transition = 'none';
+            firstObject.style.display = 'block';
+            simulationObjects = [];
+            resetObject(firstObject);
+          }
+          
+          // Reset object count
+          objectsInSimulation = 1;
+          
+          // Clear accretion particles
+          simulator.querySelectorAll('.accretion-particle').forEach(p => p.remove());
+        }
+        
+        function toggleTooltips() {
+          if (!showTooltipsToggle) return;
+          
+          const tooltips = simulator.querySelectorAll('.simulator-tooltip');
+          if (showTooltipsToggle.checked) {
+            // Show tooltips in appropriate positions
+            const eventHorizonElem = simulator.querySelector('.blackhole-simulator__event-horizon');
+            
+            if (eventHorizonElem) {
+              const eventHorizonPos = eventHorizonElem.getBoundingClientRect();
+              const simulatorPos = simulator.getBoundingClientRect();
+              
+              const tooltipEventHorizon = document.getElementById('tooltip-event-horizon');
+              if (tooltipEventHorizon) {
+                tooltipEventHorizon.style.left = `${eventHorizonPos.left - simulatorPos.left + eventHorizonPos.width}px`;
+                tooltipEventHorizon.style.top = `${eventHorizonPos.top - simulatorPos.top}px`;
+              }
+              
+              const tooltipAccretion = document.getElementById('tooltip-accretion');
+              if (tooltipAccretion) {
+                tooltipAccretion.style.left = `${eventHorizonPos.left - simulatorPos.left - tooltipAccretion.offsetWidth}px`;
+                tooltipAccretion.style.top = `${eventHorizonPos.top - simulatorPos.top + eventHorizonPos.height}px`;
+              }
+              
+              const tooltipLensing = document.getElementById('tooltip-lensing');
+              if (tooltipLensing) {
+                tooltipLensing.style.left = `${eventHorizonPos.left - simulatorPos.left + eventHorizonPos.width / 2}px`;
+                tooltipLensing.style.top = `${eventHorizonPos.top - simulatorPos.top - tooltipLensing.offsetHeight}px`;
+              }
+            }
+            
+            tooltips.forEach(tooltip => tooltip.classList.add('visible'));
+          } else {
+            tooltips.forEach(tooltip => tooltip.classList.remove('visible'));
+          }
+        }
+        
+        // Initialize the black hole mass and tooltips
+        updateBlackHoleMass();
+        toggleTooltips();
+        
+        // Add event listeners for all controls
+        if (startBtn) {
+          startBtn.addEventListener('click', runSimulation);
+        }
+        
+        if (resetBtn) {
+          resetBtn.addEventListener('click', resetSimulation);
+        }
+        
+        if (addObjectBtn) {
+          addObjectBtn.addEventListener('click', createNewObject);
+        }
+        
+        if (massSlider) {
+          massSlider.addEventListener('input', updateBlackHoleMass);
+        }
+        
+        if (showLensingToggle) {
+          showLensingToggle.addEventListener('change', applyGravitationalLensing);
+        }
+        
+        if (showTooltipsToggle) {
+          showTooltipsToggle.addEventListener('change', toggleTooltips);
+        }
+        
+        // Time control buttons
+        if (slowTimeBtn) {
+          slowTimeBtn.addEventListener('click', () => {
+            timeRate = Math.max(0.1, timeRate - 0.2);
+            if (timeRateDisplay) {
+              timeRateDisplay.textContent = timeRate.toFixed(1) + 'x';
+            }
+          });
+        }
+        
+        if (fastTimeBtn) {
+          fastTimeBtn.addEventListener('click', () => {
+            timeRate = Math.min(3.0, timeRate + 0.2);
+            if (timeRateDisplay) {
+              timeRateDisplay.textContent = timeRate.toFixed(1) + 'x';
+            }
+          });
+        }
+        
+        // Physics explanation toggle
+        if (physicsToggle) {
+          physicsToggle.addEventListener('click', function() {
+            const content = document.querySelector('.physics-explanation__content');
+            const icon = this.querySelector('i');
+            
+            if (content && icon) {
+              content.classList.toggle('visible');
+              icon.className = content.classList.contains('visible') ? 
+                'fas fa-chevron-up' : 'fas fa-chevron-down';
+            }
+          });
+        }
+        
+        // Simulator click handler for manual object placement
+        simulator.addEventListener('click', function(e) {
+          if (simulationRunning) return;
+          
+          // Ignore clicks on buttons and controls
+          if (e.target.closest('.blackhole-simulator__controls') || 
+              e.target.closest('.simulator-tooltip') ||
+              e.target.closest('.blackhole-simulator__black-hole')) {
+            return;
+          }
+          
+          // Get the first simulation object or create one if none exists
+          let object = simulationObjects[0];
+          if (!object || !object.element) {
+            const firstObject = simulator.querySelector('.blackhole-simulator__object');
+            if (firstObject) {
+              resetObject(firstObject);
+              object = simulationObjects[0];
+            } else {
+              return; // No object to place
+            }
+          }
+          
+          // Update object position to click position
+          const rect = simulator.getBoundingClientRect();
+          object.position.x = e.clientX - rect.left;
+          object.position.y = e.clientY - rect.top;
+          
+          // Apply position to element
+          object.element.style.left = `${object.position.x}px`;
+          object.element.style.top = `${object.position.y}px`;
+          
+          // Reset velocity to be tangential to black hole
+          if (blackHole) {
+            const blackHoleRect = blackHole.getBoundingClientRect();
+            
+            const blackHolePos = {
+              x: blackHoleRect.left - rect.left + blackHoleRect.width / 2,
+              y: blackHoleRect.top - rect.top + blackHoleRect.height / 2
+            };
+            
+            const dx = object.position.x - blackHolePos.x;
+            const dy = object.position.y - blackHolePos.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Adjust velocity to create an orbit
+            const angle = Math.atan2(dy, dx);
+            const tangentialAngle = angle + Math.PI / 2;
+            const blackHoleMass = parseInt(blackHole.getAttribute('data-mass'));
+            const speed = Math.sqrt(blackHoleMass / Math.max(distance, 10)) * 1.5; // Approximate orbital velocity
+            
+            object.velocity.x = Math.cos(tangentialAngle) * speed;
+            object.velocity.y = Math.sin(tangentialAngle) * speed;
+          }
+          
+          // Update object type if selector is available
+          if (objectTypeSelector) {
+            object.type = objectTypeSelector.value;
+            updateObjectAppearance(object.element, object.type);
+          }
+        });
+        
+        // Return successful initialization
+        console.log("Black hole simulation initialized successfully");
+        return true;
+      }
+      
+      // Make sure the Explore Beyond functionality properly initializes the black hole
+      document.addEventListener('DOMContentLoaded', function() {
+        // Fix Universe Explorer button functionality
+        const universeExplorerBtn = document.querySelector('.universe-explorer__toggle');
+        const universeModal = document.querySelector('.universe-modal');
+        const universeOverlay = document.querySelector('.universe-overlay');
+        const universeModalClose = document.querySelector('.universe-modal__close');
+        
+        if (universeExplorerBtn) {
+          universeExplorerBtn.addEventListener('click', function() {
+            // Open the universe explorer modal
+            universeModal.classList.add('universe-modal--active');
+            universeOverlay.classList.add('universe-overlay--active');
+            
+            // Initialize the first visible section (black holes by default)
+            const activeSection = document.querySelector('.universe-nav-btn--active');
+            if (activeSection && activeSection.getAttribute('data-target') === 'black-holes') {
+              // Use setTimeout to ensure the modal is visible before initializing
+              setTimeout(() => {
+                initBlackHoleSimulation();
+              }, 100);
+            }
+          });
+        }
+        
+        // Ensure navigation between sections also initializes the black hole simulation
+        const universeNavButtons = document.querySelectorAll('.universe-nav-btn');
+        universeNavButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            // Show selected section
+            const targetSection = this.getAttribute('data-target');
+            if (targetSection === 'black-holes') {
+              setTimeout(() => {
+                initBlackHoleSimulation();
+              }, 100);
+            }
+          });
+        });
+      });
+    </script>
+
+    <style>
+      /* Dynamic comet particle styling */
+      .comet-particle {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        pointer-events: none;
+        z-index: 2;
+      }
+      
+      /* Different trail for alternative comet */
+      .comet--alt::after {
+        background: linear-gradient(to left, #fff, var(--trail-color, rgba(255, 255, 255, 0)));
+        width: 80px;
+        height: 3px;
+      }
+    </style>
   </body>
 </html>

@@ -1,13 +1,21 @@
 @use '../abstracts/_all' as abstracts
+@use 'sass:math'
 
 .star
     width: 25px
     height: 25px
+    transition: all 0.3s ease
 
-    @for $index from 1 through 25
+    @for $index from 1 through 30
         &:nth-child(#{$index})
             position: absolute
             top: abstracts.random-position()
             left: abstracts.random-position()
             rotate: abstracts.random-rotate()
             filter: abstracts.random-blur()
+            $size: math.random(4) * 5 + 5
+            $delay: math.random(5)
+            width: #{$size}px
+            height: #{$size}px
+            animation: twinkle #{math.random(3) + 2}s ease-in-out infinite
+            animation-delay: -#{$delay}s

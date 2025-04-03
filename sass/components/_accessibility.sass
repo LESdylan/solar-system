@@ -1,0 +1,93 @@
+@use "../abstracts/_all" as abstracts
+@use "sass:math"
+
+.accessibility-controls
+  position: fixed
+  top: 20px
+  left: 20px
+  z-index: 200
+  
+  &__toggle
+    width: 40px
+    height: 40px
+    border-radius: 50%
+    background: rgba(20, 30, 60, 0.8)
+    color: white
+    border: none
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    font-size: 20px
+    box-shadow: 0 0 15px rgba(100, 150, 255, 0.3)
+    
+    &:hover
+      background: rgba(30, 40, 80, 0.9)
+  
+  &__panel
+    position: absolute
+    top: 50px
+    left: 0
+    background: rgba(20, 30, 60, 0.9)
+    backdrop-filter: blur(10px)
+    padding: 15px
+    border-radius: 10px
+    color: white
+    width: 200px
+    transform: translateX(-250px)
+    transition: transform 0.3s ease
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4)
+    
+    &--active
+      transform: translateX(0)
+    
+    h3
+      margin: 0 0 15px 0
+      font-size: 16px
+  
+  &__option
+    margin-bottom: 10px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    
+    label
+      font-size: 14px
+    
+    input[type="checkbox"]
+      width: 16px
+      height: 16px
+
+// Body classes for accessibility features
+body
+  &.reduce-motion
+    *
+      animation-duration: 0.0001s !important
+      transition-duration: 0.0001s !important
+    
+    .planet, .sun, .star, .comet, .satellite
+      animation: none !important
+  
+  &.high-contrast
+    background-color: #000 !important
+    background-image: none !important
+    
+    .planet, .sun
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.9) !important
+    
+    .control-panel, .planet-info, .quiz-modal, .universe-modal, .astronaut-guide__speech-bubble
+      background: rgba(0, 0, 0, 0.95) !important
+      color: white !important
+      border: 2px solid white !important
+  
+  &.larger-text
+    font-size: 1.2em !important
+    
+    .planet-info, .quiz-modal, .universe-modal, .astronaut-guide__speech-bubble
+      font-size: 1.2em !important
+  
+  &.screen-reader-support
+    .planet, .sun, .control-panel__button, .timeline__event
+      &:focus
+        outline: 3px solid #fff !important
+        outline-offset: 3px !important

@@ -1,5 +1,6 @@
 @use "./_variables" as var
 @use "sass:math"
+@use "sass:list"
 
 @mixin circle($diameter, $url: '')
     border-radius: 100%
@@ -7,15 +8,43 @@
     height: $diameter
     background-image: url($url)
     flex-shrink: 0
+    background-size: cover
+    position: relative
 
 @mixin rotate-around-planet($duration: 5s, $planet-size)
     $center-x: 50%
-    $center-y: calc(50% + math.div($planet-size, 2))
+    $center-y: calc(50% + ($planet-size / 2))
     transform-origin: $center-x $center-y
     animation: animation-rotate $duration linear infinite
 
 @mixin rotate-around-sun($distance-to-sun, $planet-size, $duration: 10s)
-    $center-x: -1 * ($distance-to-sun + math.div(var.$sun-size, 2))
-    $center-y: calc(math.div($planet-size, 2))
+    $center-x: -1 * ($distance-to-sun + calc(var.$sun-size / 2))
+    $center-y: calc($planet-size / 2)
     transform-origin: $center-x $center-y
-    animation: animation-rotate $duration linear infinite
+    animation: animation-orbit $duration linear infinite
+    animation-duration: calc(#{$duration} / var(--planet-orbit-speed-factor, 1))
+
+@mixin self-rotate($duration: 5s)
+    // The actual rotation is handled directly in the planet class
+    // This ensures the planet-surface element exists and has the correct base styles
+    // but the animation is applied directly in the planet styles
+
+@mixin orbit-path($distance-to-sun, $planet-size)
+    // ...existing code...
+
+@mixin planet-ring($color: rgba(210, 180, 140, 0.8), $tilt: 20deg)
+    &::after
+        content: ""
+        position: absolute
+        width: 170%
+        height: 30px
+        background: linear-gradient(to right, transparent 10%, $color 30%, $color 70%, transparent 90%)
+        top: 50%
+        left: -35%
+        border-radius: 50%
+        transform: translateY(-50%) rotateX($tilt)
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+        z-index: -1
+
+@mixin planet-glow($color, $size: 15px)
+    box-shadow: 0 0 $size $color

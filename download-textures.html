@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Planet Textures</title>
+</head>
+<body>
+  <h1>Planet Texture Downloader</h1>
+  <p>Run this script to download realistic planet textures to the assets/images folder.</p>
+  
+  <button id="downloadButton">Download Textures</button>
+  
+  <script>
+    // URLs of realistic planet textures
+    const textureURLs = {
+      'sun-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_sun.jpg',
+      'mercury-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_mercury.jpg',
+      'venus-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_venus_atmosphere.jpg',
+      'earth-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_earth_daymap.jpg',
+      'mars-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_mars.jpg',
+      'jupiter-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_jupiter.jpg',
+      'saturn-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_saturn.jpg',
+      'uranus-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_uranus.jpg',
+      'neptune-texture.jpg': 'https://www.solarsystemscope.com/textures/download/2k_neptune.jpg'
+    };
+    
+    document.getElementById('downloadButton').addEventListener('click', async function() {
+      const imagesPath = 'assets/images/';
+      
+      for (const [filename, url] of Object.entries(textureURLs)) {
+        try {
+          const response = await fetch(url);
+          const blob = await response.blob();
+          const objectUrl = URL.createObjectURL(blob);
+          
+          // Create download link
+          const link = document.createElement('a');
+          link.href = objectUrl;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          console.log(`Downloaded ${filename}`);
+        } catch (error) {
+          console.error(`Error downloading ${filename}: ${error}`);
+        }
+      }
+      
+      alert('Textures downloaded! Please move them to the assets/images folder.');
+    });
+  </script>
+</body>
+</html>

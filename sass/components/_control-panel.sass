@@ -1,0 +1,166 @@
+@use "../abstracts/_all" as abstracts
+@use "sass:math"
+
+.control-panel
+  position: fixed
+  bottom: 20px
+  right: 20px
+  background: rgba(10, 10, 30, 0.7)
+  backdrop-filter: blur(10px)
+  border-radius: 10px
+  padding: 15px
+  z-index: 100
+  color: white
+  width: 300px
+  box-shadow: 0 0 20px rgba(100, 100, 255, 0.3)
+  transform: translateX(320px)
+  transition: transform 0.3s ease
+  
+  &--active
+    transform: translateX(0)
+  
+  &__header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 15px
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2)
+    padding-bottom: 10px
+    
+    h3
+      margin: 0
+      font-size: 18px
+      
+  &__toggle
+    position: absolute
+    left: -50px
+    top: 10px
+    background: rgba(10, 10, 30, 0.7)
+    backdrop-filter: blur(10px)
+    border-radius: 5px 0 0 5px
+    width: 50px
+    height: 50px
+    display: flex
+    justify-content: center
+    align-items: center
+    cursor: pointer
+    border: none
+    color: white
+    font-size: 20px
+    
+    &:hover
+      background: rgba(20, 20, 40, 0.8)
+  
+  &__section
+    margin-bottom: 15px
+    
+    h4
+      margin: 0 0 10px 0
+      font-size: 16px
+      color: #8af
+  
+  &__slider
+    width: 100%
+    margin: 10px 0
+    
+    label
+      display: block
+      margin-bottom: 5px
+      font-size: 14px
+      color: #ccc
+    
+    input[type="range"]
+      width: 100%
+      background: #223
+      height: 6px
+      border-radius: 3px
+      -webkit-appearance: none
+      
+      &::-webkit-slider-thumb
+        -webkit-appearance: none
+        width: 16px
+        height: 16px
+        border-radius: 50%
+        background: #58f
+        cursor: pointer
+      
+      &::-moz-range-thumb
+        width: 16px
+        height: 16px
+        border-radius: 50%
+        background: #58f
+        cursor: pointer
+  
+  &__button
+    background: #336
+    border: none
+    padding: 8px 15px
+    border-radius: 5px
+    color: white
+    cursor: pointer
+    margin-right: 10px
+    transition: background 0.2s
+    
+    &:hover
+      background: #447
+    
+    &--active
+      background: #46a
+      
+      &:hover
+        background: #57b
+  
+  &__info
+    font-size: 14px
+    color: #ccc
+    display: block
+    margin-top: 5px
+    
+.theme-switch
+  display: flex
+  align-items: center
+  margin-bottom: 15px
+  
+  &__label
+    margin-right: 10px
+    font-size: 14px
+    color: #ccc
+  
+  &__toggle
+    position: relative
+    width: 50px
+    height: 24px
+    
+    input
+      opacity: 0
+      width: 0
+      height: 0
+      
+      &:checked + .theme-switch__slider
+        background-color: #446
+        
+        &:before
+          transform: translateX(26px)
+          background-color: #ffdf80
+    
+  &__slider
+    position: absolute
+    cursor: pointer
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: #223
+    transition: .4s
+    border-radius: 24px
+    
+    &:before
+      position: absolute
+      content: ""
+      height: 18px
+      width: 18px
+      left: 3px
+      bottom: 3px
+      background-color: #79c
+      transition: .4s
+      border-radius: 50%

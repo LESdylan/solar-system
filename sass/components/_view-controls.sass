@@ -1,0 +1,115 @@
+@use "../abstracts/_all" as abstracts
+@use "sass:math"
+
+.view-controls
+  position: fixed
+  bottom: 20px
+  left: 50%
+  transform: translateX(-50%)
+  z-index: 100
+  display: flex
+  gap: 10px
+  
+  &__button
+    background: rgba(20, 30, 60, 0.8)
+    color: white
+    border: none
+    padding: 8px 15px
+    border-radius: 20px
+    cursor: pointer
+    font-size: 14px
+    
+    &:hover
+      background: rgba(30, 40, 80, 0.9)
+    
+    &--active
+      background: #3a6bc5
+      
+      &:hover
+        background: #4b7cd6
+
+.ar-toggle
+  position: fixed
+  bottom: 20px
+  right: 20px
+  z-index: 100
+  
+  &__button
+    background: linear-gradient(135deg, #3a4d8a, #2c3e7a)
+    color: white
+    border: none
+    padding: 10px 15px
+    border-radius: 25px
+    cursor: pointer
+    font-size: 14px
+    display: flex
+    align-items: center
+    gap: 8px
+    
+    i
+      font-size: 16px
+    
+    &:hover
+      background: linear-gradient(135deg, #4a5d9a, #3c4e8a)
+      transform: translateY(-2px)
+      box-shadow: 0 5px 15px rgba(100, 150, 255, 0.4)
+    
+    &:active
+      transform: translateY(0)
+
+.ar-exit-button
+  position: fixed
+  top: 20px
+  right: 20px
+  z-index: 10000
+  background: #c33
+  color: white
+  border: none
+  padding: 10px 20px
+  border-radius: 5px
+  font-size: 16px
+  cursor: pointer
+
+// 3D view classes
+body
+  &.view-top
+    .galaxy__planets-container
+      perspective: 1500px
+      transform-style: preserve-3d
+      transform: rotateX(60deg) translateY(-200px)
+      transition: transform 1s ease
+    
+    .planet, .sun, .satellite
+      transform-style: preserve-3d
+    
+    .orbit-path--mercury, .orbit-path--venus, .orbit-path--earth,
+    .orbit-path--mars, .orbit-path--jupiter, .orbit-path--saturn,
+    .orbit-path--uranus, .orbit-path--neptune
+      transform: translate(-50%, -50%) rotateX(60deg)
+  
+  &.view-side
+    .galaxy__planets-container
+      perspective: 1500px
+      transform-style: preserve-3d
+      transform: rotateY(60deg) translateX(-200px)
+      transition: transform 1s ease
+    
+    .planet, .sun, .satellite
+      transform-style: preserve-3d
+    
+    .orbit-path--mercury, .orbit-path--venus, .orbit-path--earth,
+    .orbit-path--mars, .orbit-path--jupiter, .orbit-path--saturn,
+    .orbit-path--uranus, .orbit-path--neptune
+      transform: translate(-50%, -50%) rotateY(60deg)
+  
+  &.view-default
+    .galaxy__planets-container
+      perspective: 1000px
+      transform-style: preserve-3d
+      transform: rotateX(0) rotateY(0) translateY(0) translateX(0)
+      transition: transform 1s ease
+    
+    .orbit-path--mercury, .orbit-path--venus, .orbit-path--earth,
+    .orbit-path--mars, .orbit-path--jupiter, .orbit-path--saturn,
+    .orbit-path--uranus, .orbit-path--neptune
+      transform: translate(-50%, -50%)

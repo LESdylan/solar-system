@@ -1,0 +1,102 @@
+@use "../abstracts/_all" as abstracts
+@use "sass:math"
+
+.astronaut-guide
+  position: fixed
+  bottom: 30px
+  left: 30px
+  z-index: 150
+  display: flex
+  align-items: flex-end
+  transition: transform 0.3s ease
+  
+  &--minimized
+    .astronaut-guide__speech-bubble
+      transform: scale(0)
+      opacity: 0
+    
+    .astronaut-guide__astronaut
+      transform: scale(0.7)
+  
+  &__astronaut
+    width: 80px
+    height: 80px
+    border-radius: 50%
+    background-color: rgba(20, 30, 60, 0.8)
+    box-shadow: 0 0 20px rgba(100, 150, 255, 0.4)
+    overflow: hidden
+    cursor: pointer
+    z-index: 2
+    transition: transform 0.3s ease
+    
+    img
+      width: 100%
+      height: 100%
+      object-fit: contain
+      animation: float 3s ease-in-out infinite
+    
+    &:hover
+      transform: scale(1.1)
+  
+  &__speech-bubble
+    position: relative
+    background-color: rgba(20, 30, 60, 0.8)
+    backdrop-filter: blur(10px)
+    border-radius: 15px
+    padding: 15px 20px
+    margin-left: -10px
+    color: white
+    max-width: 300px
+    box-shadow: 0 0 20px rgba(100, 150, 255, 0.2)
+    transform-origin: left bottom
+    transition: transform 0.3s ease, opacity 0.3s ease
+    
+    &::before
+      content: ""
+      position: absolute
+      bottom: 15px
+      left: 0
+      width: 15px
+      height: 15px
+      background-color: rgba(20, 30, 60, 0.8)
+      transform: translateX(-50%) rotate(45deg)
+    
+    p
+      margin: 0 0 15px 0
+      font-size: 14px
+      line-height: 1.5
+  
+  &__button
+    background-color: #4d78c3
+    border: none
+    color: white
+    padding: 8px 16px
+    border-radius: 20px
+    font-size: 14px
+    cursor: pointer
+    transition: background-color 0.2s
+    
+    &:hover
+      background-color: #5d88d3
+
+.focus-overlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.7)
+  z-index: 140
+  pointer-events: none
+  opacity: 0
+  transition: opacity 0.3s ease
+  
+  &--active
+    opacity: 1
+  
+  &__highlight
+    position: absolute
+    border-radius: 50%
+    transform: translate(-50%, -50%)
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7)
+    background-color: transparent
